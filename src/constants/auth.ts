@@ -1,3 +1,10 @@
+export const AuthAsWho = {
+    authAsUser: 'jako parafianin',
+    authAsPriest: 'jako ksiądz',
+    userNameForBackendEndpoint: 'user',
+    priestNameForBackendEndpoint: 'priest'
+}
+
 export const LoginData = [
     {
         text: 'Zaloguj się',

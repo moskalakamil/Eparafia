@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { LandingNavLinkData, LandingNavLinkButton, AuthAsWho  } from '../../../constants/navbar'
+import { useState } from 'react'
 
 import { Link } from 'react-router-dom'
-
 import styled from 'styled-components'
+
+import { LandingNavLinkData, LandingNavLinkButton,   } from '../../../constants/navbar'
+import { AuthAsWho } from '../../../constants/auth'
+
 import { NavLinksStyle, NavButtonLinksStyle } from '../../../style/TextStyles'
 import Modal from '../Cards/Modals'
 
@@ -12,10 +14,10 @@ const TheHeader = () => {
   const [userLink, setUserLink] = useState('')
   const [priestLink, setPriestLink] = useState('')
   
-  const setStates = (text: string, linkUser: string, linkPriest: string) =>{
-    setAuthAction(text)
-    setUserLink(linkUser)
-    setPriestLink(linkPriest)
+  const setStates = (authText: string, userLink: string, priestLink: string) =>{
+    setAuthAction(authText)
+    setUserLink(userLink)
+    setPriestLink(priestLink)
   }
 
   const closeModal = () =>{
@@ -40,11 +42,11 @@ const TheHeader = () => {
         {authAction.length && (
           <Modal>
             <>
-            <Link to={userLink} onClick={closeModal}>
-                <button>{authAction} {AuthAsWho.authAsUser}</button>
+            <Link to={userLink} onClick={closeModal} state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint}}>
+                <button>{authAction} {AuthAsWho.authAsUser}</button>        {/* login/register as user */}
             </Link>
-            <Link to={priestLink} onClick={closeModal}>
-                <button>{authAction} {AuthAsWho.authAsPriest}</button>
+            <Link to={priestLink} onClick={closeModal} state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint}}>
+                <button>{authAction} {AuthAsWho.authAsPriest}</button>      {/* login/register as priest */}
               </Link>
             </>
           </Modal>

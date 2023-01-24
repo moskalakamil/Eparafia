@@ -9,10 +9,11 @@ import LoginCard from '../Global/Cards/LoginCard'
 
 import styled from 'styled-components'
 
-const LoginPage = () => {
+const LoginPage = (props: {whoIsLogin: string}) => {
     const [enteredMail, setEnteredMail] = useState('')
     const [enteredPassword, setEnteredPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
 
     const emailInput = (event: React.ChangeEvent<HTMLInputElement>): void =>{
         setEnteredMail(event.target.value)
@@ -26,7 +27,9 @@ const LoginPage = () => {
         
         try{
             setIsLoading(true)
-            const res = await fetch('http://91.227.2.183:83/priest/login', {
+            setError('')
+            
+            const res = await fetch(`http://91.227.2.183:83/${props.whoIsLogin}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,11 +39,20 @@ const LoginPage = () => {
                     password: enteredPassword,
               }),
             })
-            
             const data = await res.json()
-            console.log(data.data.jwt)
-            } catch(err){
-                console.error(err)
+            console.log(data)
+            if(!res.ok){
+                let errorMessage = data.Errors.Message[0]
+                if (errorMessage === 'User not found') errorMessage = 'Nie znaleziono użytkownika'
+                else if (errorMessage === 'Bad password') errorMessage = 'Błędne hasło, spróbuj ponownie'
+                else errorMessage = 'Coś poszło nie tak, spróbuj ponownie'
+                
+                throw new Error(errorMessage)
+            }
+            // console.log(data.data.jwt)
+            } catch(err: any){
+                console.log(err)
+                setError(err.message)
             }
             setIsLoading(false)
     }   
@@ -58,8 +70,13 @@ const LoginPage = () => {
                                 <input onInput={passwordInput} id={LoginData[2].type} type={LoginData[2].type} required placeholder={LoginData[2].placeholder}/>
                                 <p>{LoginData[3].text}</p>
                                 <button type='submit'>{LoginData[4].text}</button>
-                                <p>{LoginData[5].text}<Link to={LoginData[5].link}>{LoginData[5].span}</Link></p>
                             </FormStyle>
+                                <p>{LoginData[5].text}<Link to={LoginData[5].link}>{LoginData[5].span}</Link></p>
+                                {error.length !== 0 &&
+                                <>
+                                    <ErrorStyle>{error}</ErrorStyle>
+                                </>
+                                }
                         </>
                     }
                 </LoginCard>
@@ -84,4 +101,7 @@ flex-direction: column;
     & label{
         margin: 10px 0
     }
+`
+const ErrorStyle = styled.p`
+color: red;
 `

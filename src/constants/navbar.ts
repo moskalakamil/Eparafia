@@ -37,7 +37,3 @@ export const LandingNavLinkButton = [
     }
 ]
 
-export const AuthAsWho = {
-        authAsUser: 'jako parafianin',
-        authAsPriest: 'jako ksiądz'
-    }
