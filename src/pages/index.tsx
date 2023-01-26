@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+import TheHero from "../components/Landing/Hero/TheHero";
 
-import TheHeader from '../components/Landing/TheHeader/TheHeader'
+import TheHeader from "../components/Global/TheHeader/TheHeader";
+import Modal from "../components/Global/UI/Cards/Modals";
 
 const LandingPage = () => {
   return (
-    <TheHeader />
-  )
-}
+    <>
+      <TheHeader />
+      <TheHero />
+    </>
+  );
+};
 
-export default LandingPage
+export default LandingPage;
