@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import TheHeader from "../components/Global/TheHeader/TheHeader";
-import LogInForm from "../components/AuthPages/LogInForm";
+import SignUpForm from "../components/AuthPages/SignUpForm";
 
-const LogIn = (props: any) => {
+const SignUp = (props: any) => {
   const [whoIsLogin, setWhoIsLogin] = useState(""); //from where taking data in fetch
 
   const location = useLocation();
@@ -16,9 +16,9 @@ const LogIn = (props: any) => {
   return (
     <>
       <TheHeader />
-      <LogInForm whoIsLogin={whoIsLogin} />
+      <SignUpForm whoIsLogin={whoIsLogin} />
     </>
   );
 };
 
-export default LogIn;
+export default SignUp;

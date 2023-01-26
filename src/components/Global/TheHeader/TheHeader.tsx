@@ -1,62 +1,84 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { LandingNavLinkData, LandingNavLinkButton,   } from '../../../constants/navbar'
-import { AuthAsWho } from '../../../constants/auth'
+import {
+  LandingNavLinkData,
+  LandingNavLinkButton,
+  LogoData,
+} from "../../../constants/navbar";
+import { AuthAsWho, AuthLinks } from "../../../constants/auth";
 
-import { NavLinksStyle, NavButtonLinksStyle } from '../../../style/TextStyles'
-import Modal from '../Cards/Modals'
+import Modal from "../UI/Cards/Modals";
+import { normalText } from "../../../style/TextSize";
 
 const TheHeader = () => {
-  const [authAction, setAuthAction] = useState('')
-  const [userLink, setUserLink] = useState('')
-  const [priestLink, setPriestLink] = useState('')
-  
-  const setStates = (authText: string, userLink: string, priestLink: string) =>{
-    setAuthAction(authText)
-    setUserLink(userLink)
-    setPriestLink(priestLink)
-  }
+  const [authAction, setAuthAction] = useState("");
+  const [index, setIndex] = useState(0);
 
-  const closeModal = () =>{
-    setAuthAction('')
-  }
+  const closeModal = () => {
+    setAuthAction("");
+  };
+
+  const correctLink = (text: string) => {
+    setAuthAction(text);
+    if (text === LandingNavLinkButton[0].text) setIndex(0);
+    else if (text === LandingNavLinkButton[1].text) setIndex(1);
+  };
+
   return (
     <HeaderStyle>
-      <Link to='/'>
-        <img src='/images//Global/logo.png' />
+      <Link to={LogoData.link}>
+        <img src={LogoData.source} />
       </Link>
       <div>
         <ul>
-          {LandingNavLinkData.map(data =>(
-            <NavLinksStyle key={data.id}>{data.text}</NavLinksStyle>
+          {LandingNavLinkData.map((data) => (
+            <li key={data.id}>{data.text}</li>
           ))}
         </ul>
         {LandingNavLinkButton.map((data) => (
-            <NavButtonLinksStyle onClick={() => setStates(data.text, data.linkUser, data.linkPriest)} key={data.id} color={data.color}>
-              {data.text}
-            </NavButtonLinksStyle>
+          <ButtonStyle
+            onClick={() => correctLink(data.text)}
+            key={data.id}
+            color={data.color}
+          >
+            {data.text}
+          </ButtonStyle>
         ))}
-        {authAction.length && (
+        {authAction.length > 0 && (
           <Modal>
             <>
-            <Link to={userLink} onClick={closeModal} state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint}}>
-                <button>{authAction} {AuthAsWho.authAsUser}</button>        {/* login/register as user */}
-            </Link>
-            <Link to={priestLink} onClick={closeModal} state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint}}>
-                <button>{authAction} {AuthAsWho.authAsPriest}</button>      {/* login/register as priest */}
+              <Link
+                to={AuthLinks[index].linkUser}
+                onClick={closeModal}
+                state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint }}
+              >
+                <button>
+                  {authAction} {AuthAsWho.authAsUser}
+                </button>
+                {/* login/register as user */}
+              </Link>
+              <Link
+                to={AuthLinks[index].linkPriest}
+                onClick={closeModal}
+                state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint }}
+              >
+                <button>
+                  {authAction} {AuthAsWho.authAsPriest}
+                </button>
+                {/* login/register as priest */}
               </Link>
             </>
           </Modal>
         )}
       </div>
     </HeaderStyle>
-  )
-}
+  );
+};
 
-export default TheHeader
+export default TheHeader;
 
 const HeaderStyle = styled.div`
   position: fixed;
@@ -67,28 +89,44 @@ const HeaderStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   top: 0;
-  background-color: rgba(53,53,53,.3);
+  background-color: rgba(53, 53, 53, 0.3);
   z-index: 5;
 
-  &>div{
+  & > div {
     display: flex;
     align-items: center;
-    
-    ul{
+
+    ul {
       list-style: none;
       display: flex;
-      
-    
-      & li{
-        margin: 0 40px;
+
+      & li {
+        margin: 0 25px;
+        font-size: ${normalText.size};
+        color: white;
       }
     }
-    
-    button{
-      padding: 15px;
-      margin: 0 20px;
-      border: none;
-      border-radius: 20px;
-    }
   }
-`
+`;
+const ButtonStyle = styled.button`
+  padding: 15px;
+  margin: 0 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  background-color: ${(props) => props.color};
+
+  // export const NavButtonLinksStyle = styled.button
+`;
+// font-size: 25px;
+// color: white;
+// font-weight: 600;
+// background-color: ${(props) => props.color} ;
+// `
+// export const LabelStyle = styled.label`
+// margin: 0;
+// font-size: 25px;
+// `

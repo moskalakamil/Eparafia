@@ -1,39 +1,44 @@
+export const LogoData = {
+  link: "/",
+  source: "/images//Global/logo.png",
+};
 export const LandingNavLinkData = [
-    {
-        id: 1,
-        text: 'Jestem księdzem',
-        link: 'asd'
-    },
-    {
-        id: 2,
-        text: 'Jestem księdzem',
-        link: 'asd'
-    },
-    {
-        id: 3,
-        text: 'Jestem księdzem',
-        link: 'asd'
-    },
-    {
-        id: 4,
-        text: 'Kontakt',
-        link: 'asd'
-    }
-]
+  {
+    //0
+    id: 1,
+    text: "Jestem księdzem",
+    link: "asd",
+  },
+  {
+    //1
+    id: 2,
+    text: "Jestem księdzem",
+    link: "asd",
+  },
+  {
+    //2
+    id: 3,
+    text: "Jestem księdzem",
+    link: "asd",
+  },
+  {
+    //3
+    id: 4,
+    text: "Kontakt",
+    link: "asd",
+  },
+];
 export const LandingNavLinkButton = [
-    {
-        id: 1,
-        text: 'Zaloguj',
-        linkUser: '/login',
-        linkPriest: '/login-priest',
-        color: 'transparent'
-    },
-    {
-        id: 2,
-        text: 'Zarejestruj',
-        linkUser: '/register',
-        linkPriest: '/register-priest',
-        color: 'rgba(40,40,40,.9)'
-    }
-]
-
+  {
+    //0
+    id: 1,
+    text: "Zaloguj",
+    color: "transparent",
+  },
+  {
+    //1
+    id: 2,
+    text: "Zarejestruj",
+    color: "rgba(40,40,40,.9)",
+  },
+];
