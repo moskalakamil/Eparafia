@@ -1,11 +1,7 @@
-import HeroBackground from '../../Global/Hero/HeroBackground'
+import HeroBackground from "../../Global/Hero/HeroBackground";
 
 const TheBackground = () => {
-  return (
-    <HeroBackground>
-      <div>asdasd</div>
-    </HeroBackground>
-  )
-}
+  return <HeroBackground isLandingPage={true}></HeroBackground>;
+};
 
-export default TheBackground
+export default TheBackground;

@@ -4,18 +4,6 @@ export const AuthAsWho = {
   userNameForBackendEndpoint: "user",
   priestNameForBackendEndpoint: "priest",
 };
-export const AuthLinks = [
-  {
-    //0
-    linkUser: "/login",
-    linkPriest: "/login-priest",
-  },
-  {
-    //1
-    linkUser: "/register",
-    linkPriest: "/register-priest",
-  },
-];
 
 export const LoginData = [
   {

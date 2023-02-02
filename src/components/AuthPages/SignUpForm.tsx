@@ -1,14 +1,29 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-import { SignUpData } from "../../constants/auth";
-import LoadingSpinner from "../Global/Loading/LoadingSpinner";
+import { Form, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AuthBackground from "./AuthBackground";
+
+import { useDispatch, useSelector } from "react-redux";
+import { authAction } from "../../store/AuthSlice";
+
+import LoadingSpinner from "../Global/Loading/LoadingSpinner";
 import TextDetails from "../Global/UI/TextDetails/TextDetails";
+import AuthBackground from "./AuthBackground";
+
+import { AuthAsWho, SignUpData } from "../../constants/auth";
 import { bigText } from "../../style/TextSize";
+import AuthInterface from "../../models/authModel";
+import { BaseURL } from "../../constants/baseURL";
+import ButtonDetails from "../Global/UI/ButtonDetails";
+import { secondary } from "../../style/Colors";
 
 const SignupForm = (props: { whoIsLogin: string }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const whoIsAuthenticated = useSelector(
+    (state: AuthInterface) => state.auth.whoIsAuthenticated
+  );
+
   const [enteredName, setEnteredName] = useState("");
   const [enteredSurname, setEnteredSurname] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -51,45 +66,48 @@ const SignupForm = (props: { whoIsLogin: string }) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      setIsLoading(true);
-      setError("");
+    dispatch(authAction.logIn(props.whoIsLogin));
+    if (props.whoIsLogin === "priest") {
+      navigate("/priest");
+    } else navigate("/");
+    //   try {
+    //     setIsLoading(true);
+    //     setError("");
 
-      const res = await fetch(
-        `http://91.227.2.183:83/${props.whoIsLogin}/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: enteredName,
-            surname: enteredSurname,
-            email: enteredEmail,
-            password: enteredPassword,
-            confirmPassword: enteredConfirmPassword,
-            contact: {
-              phoneNumber: enteredPhoneNumber,
-              email: enteredEmail,
-            },
-          }),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) {
-        let errorMessage = data.Errors.Password || data.Errors.Email;
-        // if (errorMessage === "User not found")
-        //   errorMessage = "Nie znaleziono użytkownika";
-        // else if (errorMessage === "Bad password")
-        //   errorMessage = "Błędne hasło, spróbuj ponownie";
-        // else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
+    // const res = await fetch(`${BaseURL + props.whoIsLogin}/register`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     name: enteredName,
+    //     surname: enteredSurname,
+    //     email: enteredEmail,
+    //     password: enteredPassword,
+    //     confirmPassword: enteredConfirmPassword,
+    //     contact: {
+    //       phoneNumber: enteredPhoneNumber,
+    //       email: enteredEmail,
+    //     },
+    //   }),
+    // });
+    //     const data = await res.json();
 
-        throw new Error(errorMessage);
-      }
-    } catch (err: any) {
-      setError(err.message);
-    }
-    setIsLoading(false);
+    //     if (!res.ok) {
+    //       let errorMessage = data.Errors.Password || data.Errors.Email;
+    //       // if (errorMessage === "User not found")
+    //       //   errorMessage = "Nie znaleziono użytkownika";
+    //       // else if (errorMessage === "Bad password")
+    //       //   errorMessage = "Błędne hasło, spróbuj ponownie";
+    //       // else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
+
+    //       throw new Error(errorMessage);
+    //     }
+    //     dispatch(authAction.logIn(data.data.jwt));
+    //   } catch (err: any) {
+    //     setError(err.message);
+    //   }
+    //   setIsLoading(false);
   };
 
   return (
@@ -98,7 +116,16 @@ const SignupForm = (props: { whoIsLogin: string }) => {
         <LoadingSpinner />
       ) : (
         <>
-          <TextDetails text={SignUpData[0].text} size={bigText.size} />
+          <TextDetails
+            text={
+              SignUpData[0].text +
+              " " +
+              (props.whoIsLogin === "priest"
+                ? AuthAsWho.authAsPriest
+                : AuthAsWho.authAsUser)
+            }
+            size={bigText.size}
+          />
           <FormStyle onSubmit={submitHandler}>
             <LabelStyle htmlFor={SignUpData[1].text}>
               {SignUpData[1].text}
@@ -160,11 +187,19 @@ const SignupForm = (props: { whoIsLogin: string }) => {
               required
               placeholder={SignUpData[6].placeholder}
             />
-            <button type="submit">{SignUpData[7].text}</button>
+            <ButtonDetails
+              text={SignUpData[7].text}
+              color={secondary}
+              typeOfBtn="submit"
+            ></ButtonDetails>
           </FormStyle>
           <p>
             {SignUpData[8].text}
-            <Link to={"/"}>{SignUpData[8].span}</Link>
+            <Link
+              to={props.whoIsLogin === "priest" ? "/login-priest" : "/login"}
+            >
+              {SignUpData[8].span}
+            </Link>
           </p>
           {error.length !== 0 && <ErrorStyle>{error}</ErrorStyle>}
         </>
@@ -188,13 +223,20 @@ const FormStyle = styled.form`
     margin: 5px 0;
   }
   & label {
-    margin: 5px 0;
+    margin: 10px 0;
   }
 `;
 const ErrorStyle = styled.p`
   color: red;
 `;
-export const LabelStyle = styled.label`
+const LabelStyle = styled.label`
   margin: 0;
   font-size: 25px;
+`;
+const ButtonStyle = styled.button`
+  background-color: #8abaf2;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
 `;

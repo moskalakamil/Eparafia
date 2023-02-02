@@ -1,35 +1,45 @@
 import { useState } from "react";
-
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+
+import Modal from "../UI/Cards/Modals";
+import AuthAsWhoModal from "../../AuthPages/AuthAsWhoModal";
 
 import {
   LandingNavLinkData,
   LandingNavLinkButton,
   LogoData,
 } from "../../../constants/navbar";
-import { AuthAsWho, AuthLinks } from "../../../constants/auth";
 
-import Modal from "../UI/Cards/Modals";
 import { normalText } from "../../../style/TextSize";
+import AuthInterface from "../../../models/authModel";
+import { authAction } from "../../../store/AuthSlice";
 
 const TheHeader = () => {
-  const [authAction, setAuthAction] = useState("");
-  const [index, setIndex] = useState(0);
+  const dispatch = useDispatch();
+
+  const whoIsAuthenticated = useSelector(
+    (state: AuthInterface) => state.auth.whoIsAuthenticated
+  );
+
+  const [authCase, setAuthCase] = useState("");
 
   const closeModal = () => {
-    setAuthAction("");
+    setAuthCase("");
   };
 
   const correctLink = (text: string) => {
-    setAuthAction(text);
-    if (text === LandingNavLinkButton[0].text) setIndex(0);
-    else if (text === LandingNavLinkButton[1].text) setIndex(1);
+    setAuthCase(text);
+  };
+
+  const logOut = () => {
+    dispatch(authAction.logOut());
   };
 
   return (
     <HeaderStyle>
-      <Link to={LogoData.link}>
+      <Link to="/">
         <img src={LogoData.source} />
       </Link>
       <div>
@@ -38,41 +48,25 @@ const TheHeader = () => {
             <li key={data.id}>{data.text}</li>
           ))}
         </ul>
-        {LandingNavLinkButton.map((data) => (
-          <ButtonStyle
-            onClick={() => correctLink(data.text)}
-            key={data.id}
-            color={data.color}
-          >
-            {data.text}
-          </ButtonStyle>
-        ))}
-        {authAction.length > 0 && (
-          <Modal>
-            <>
-              <Link
-                to={AuthLinks[index].linkUser}
-                onClick={closeModal}
-                state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint }}
+        {whoIsAuthenticated === "" && (
+          <>
+            {LandingNavLinkButton.map((data) => (
+              <ButtonStyle
+                onClick={() => correctLink(data.text)}
+                key={data.id}
+                color={data.color}
               >
-                <button>
-                  {authAction} {AuthAsWho.authAsUser}
-                </button>
-                {/* login/register as user */}
-              </Link>
-              <Link
-                to={AuthLinks[index].linkPriest}
-                onClick={closeModal}
-                state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint }}
-              >
-                <button>
-                  {authAction} {AuthAsWho.authAsPriest}
-                </button>
-                {/* login/register as priest */}
-              </Link>
-            </>
-          </Modal>
+                {data.text}
+              </ButtonStyle>
+            ))}
+          </>
         )}
+        {whoIsAuthenticated !== "" && (
+          <>
+            <p onClick={logOut}>zalogowano</p>
+          </>
+        )}
+        <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
       </div>
     </HeaderStyle>
   );
@@ -80,7 +74,7 @@ const TheHeader = () => {
 
 export default TheHeader;
 
-const HeaderStyle = styled.div`
+const HeaderStyle = styled.header`
   position: fixed;
   width: 100vw;
   height: 140px;
@@ -89,6 +83,7 @@ const HeaderStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   top: 0;
+  left: 0;
   background-color: rgba(53, 53, 53, 0.3);
   z-index: 5;
 
@@ -118,8 +113,6 @@ const ButtonStyle = styled.button`
   font-weight: 600;
   color: white;
   background-color: ${(props) => props.color};
-
-  // export const NavButtonLinksStyle = styled.button
 `;
 // font-size: 25px;
 // color: white;

@@ -1,22 +1,27 @@
-import React, { InputHTMLAttributes, useEffect, useState } from "react";
-import { AuthAsWho, AuthLinks, LoginData } from "../../constants/auth";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+import { AuthAsWho, LoginData } from "../../constants/auth";
 
 import LoadingSpinner from "../Global/Loading/LoadingSpinner";
-import HeroBackground from "../Global/Hero/HeroBackground";
-import LoginCard from "../Global/UI/Cards/LoginCard";
 
-import styled from "styled-components";
 import AuthBackground from "./AuthBackground";
 import TextDetails from "../Global/UI/TextDetails/TextDetails";
 import { bigText } from "../../style/TextSize";
+import { authAction } from "../../store/AuthSlice";
+import AuthInterface from "../../models/authModel";
+import ButtonDetails from "../Global/UI/ButtonDetails";
 
 const LogInForm = (props: { whoIsLogin: string }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [enteredMail, setEnteredMail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  console.log(props.whoIsLogin);
   const emailInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setEnteredMail(event.target.value);
   };
@@ -27,41 +32,44 @@ const LogInForm = (props: { whoIsLogin: string }) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      setIsLoading(true);
-      setError("");
+    dispatch(authAction.logIn(props.whoIsLogin));
+    if (props.whoIsLogin === "priest") {
+      navigate("/priest");
+    } else navigate("/");
+    //   try {
+    //     setIsLoading(true);
+    //     setError("");
 
-      const res = await fetch(
-        `http://91.227.2.183:83/${props.whoIsLogin}/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: enteredMail,
-            password: enteredPassword,
-          }),
-        }
-      );
-      const data = await res.json();
-      console.log(data);
-      if (!res.ok) {
-        let errorMessage = data.Errors.Message[0];
-        if (errorMessage === "User not found")
-          errorMessage = "Nie znaleziono użytkownika";
-        else if (errorMessage === "Bad password")
-          errorMessage = "Błędne hasło, spróbuj ponownie";
-        else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
+    // const res = await fetch(`${BaseURL + props.whoIsLogin}/login`, {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           email: enteredMail,
+    //           password: enteredPassword,
+    //         }),
+    //       }
+    //     );
+    //     const data = await res.json();
+    //     console.log(data);
+    //     if (!res.ok) {
+    //       let errorMessage = data.Errors.Message[0];
+    //       if (errorMessage === "User not found")
+    //         errorMessage = "Nie znaleziono użytkownika";
+    //       else if (errorMessage === "Bad password")
+    //         errorMessage = "Błędne hasło, spróbuj ponownie";
+    //       else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
 
-        throw new Error(errorMessage);
-      }
-      // console.log(data.data.jwt)
-    } catch (err: any) {
-      console.log(err);
-      setError(err.message);
-    }
-    setIsLoading(false);
+    //       throw new Error(errorMessage);
+    //     }
+    //dispatch(authAction.logIn(data.data.jwt));
+    //     // console.log(data.data.jwt)
+    //   } catch (err: any) {
+    //     console.log(err);
+    //     setError(err.message);
+    //   }
+    //   setIsLoading(false);
   };
   return (
     <AuthBackground>
@@ -69,8 +77,16 @@ const LogInForm = (props: { whoIsLogin: string }) => {
         <LoadingSpinner />
       ) : (
         <>
-          <TextDetails text={LoginData[0].text} size={bigText.size} />
-          {/* <BigTextStyle>{LoginData[0].text}</BigTextStyle> */}
+          <TextDetails
+            text={
+              LoginData[0].text +
+              " " +
+              (props.whoIsLogin === "priest"
+                ? AuthAsWho.authAsPriest
+                : AuthAsWho.authAsUser)
+            }
+            size={bigText.size}
+          />
           <FormStyle onSubmit={submitHandler}>
             <LabelStyle htmlFor={LoginData[1].text}>
               {LoginData[1].text}
@@ -93,15 +109,17 @@ const LogInForm = (props: { whoIsLogin: string }) => {
               placeholder={LoginData[2].placeholder}
             />
             <p>{LoginData[3].text}</p>
-            <button type="submit">{LoginData[4].text}</button>
+            <ButtonDetails
+              text={LoginData[4].text}
+              color="#8abaf2"
+              typeOfBtn="submit"
+            ></ButtonDetails>
           </FormStyle>
           <p>
             {LoginData[5].text}
             <Link
               to={
-                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
-                  ? AuthLinks[1].linkPriest
-                  : AuthLinks[1].linkUser
+                props.whoIsLogin === "priest" ? "/register-priest" : "/register"
               }
             >
               {LoginData[5].span}
@@ -127,6 +145,9 @@ const FormStyle = styled.form`
     outline: none;
     padding: 15px;
     margin: 10px 0 25px 0;
+    &:focus {
+      background-color: #dadada;
+    }
   }
   & label {
     margin: 10px 0;
@@ -138,4 +159,11 @@ const ErrorStyle = styled.p`
 const LabelStyle = styled.label`
   margin: 0;
   font-size: 25px;
+`;
+const ButtonStyle = styled.button`
+  background-color: #8abaf2;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
 `;

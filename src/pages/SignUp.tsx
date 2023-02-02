@@ -4,14 +4,14 @@ import { useLocation } from "react-router-dom";
 import TheHeader from "../components/Global/TheHeader/TheHeader";
 import SignUpForm from "../components/AuthPages/SignUpForm";
 
-const SignUp = (props: any) => {
-  const [whoIsLogin, setWhoIsLogin] = useState(""); //from where taking data in fetch
-
+const SignUp = (props: { state: string }) => {
   const location = useLocation();
 
+  const [whoIsLogin, setWhoIsLogin] = useState(""); //from where taking data in fetch
+
   useEffect(() => {
-    if (!props.state.AuthAsWho) setWhoIsLogin(location.state.AuthAsWho);
-    setWhoIsLogin(props.state.AuthAsWho);
+    if (!props.state) setWhoIsLogin(location.state);
+    setWhoIsLogin(props.state);
   }, [location]);
   return (
     <>
