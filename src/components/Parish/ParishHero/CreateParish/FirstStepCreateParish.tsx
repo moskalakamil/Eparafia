@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { createParishForm } from "../../../../constants/parish";
+import { createParishForm } from "../../../../constants/Parish";
 import InputDetails from "../../../Global/UI/InputDetails";
 
 const FirstStepCreateParish = () => {

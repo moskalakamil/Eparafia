@@ -1,9 +1,7 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
-import TheHeader from "../components/Global/TheHeader/TheHeader";
 import LogInForm from "../components/AuthPages/LogInForm";
+import TheHeader from "../components/Global/TheHeader/TheHeader";
 
 const LogIn = (props: { state: string }) => {
   const [whoIsLogin, setWhoIsLogin] = useState(""); //from where taking data in fetch
