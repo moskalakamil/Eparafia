@@ -16,7 +16,7 @@ import ProtectedAuthRoutes from "./utils/ProtectedAuthRoutes";
 import Priest from "./pages/Priest";
 import Parish from "./pages/Parish";
 import LogIn from "./pages/LogIn";
-import LandingPage from "./pages/Index";
+import index as LandingPage from "./pages/index";
 
 const App = () => {
   const router = createBrowserRouter(

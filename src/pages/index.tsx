@@ -4,7 +4,7 @@ import TheHero from "../components/Landing/Hero/TheHero";
 import TheHeader from "../components/Global/TheHeader/TheHeader";
 import Modal from "../components/Global/UI/Cards/Modals";
 
-const LandingPage = () => {
+const index = () => {
   return (
     <>
       <TheHeader />
@@ -13,4 +13,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default index;
