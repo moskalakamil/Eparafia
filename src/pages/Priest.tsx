@@ -4,7 +4,7 @@ import AuthBackground from "../components/AuthPages/AuthBackground";
 import TheHeader from "../components/Global/TheHeader/TheHeader";
 import ButtonDetails from "../components/Global/UI/ButtonDetails";
 import TextDetails from "../components/Global/UI/TextDetails";
-import { createOrJoinParish } from "../constants/parish";
+import { createOrJoinParish } from "../constants/Parish";
 
 import { secondary } from "../style/Colors";
 import { bigText, normalText } from "../style/TextSize";

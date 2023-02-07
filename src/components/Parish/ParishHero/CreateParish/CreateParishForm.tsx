@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { createParish } from "../../../../constants/parish";
+import { createParish } from "../../../../constants/Parish";
 import { primary } from "../../../../style/Colors";
 import { bigText, normalText } from "../../../../style/TextSize";
 import TextDetails from "../../../Global/UI/TextDetails";
