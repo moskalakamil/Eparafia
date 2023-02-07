@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import TheHeader from "../components/Global/TheHeader/TheHeader";
+import CreateParishForm from "../components/Parish/ParishHero/CreateParish/CreateParishForm";
 
 const CreateParish = () => {
   return (
-    <div>CreateParish</div>
-  )
-}
+    <>
+      <TheHeader />
+      <CreateParishForm />
+    </>
+  );
+};
 
-export default CreateParish
+export default CreateParish;

@@ -1,51 +1,55 @@
-import { Routes, Route } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
-import LandingPage from "./pages/index";
+// import LandingPage from "./pages/Index";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import CreateParish from "./pages/CreateParish";
 
-import { AuthAsWho, AuthLinks } from "./constants/auth";
-import { LandingNavLinkButton } from "./constants/navbar";
+import { AuthAsWho } from "./constants/auth";
+
+import ProtectedRoutes from "./utils/ProtectedRoutes";
+import ProtectedAuthRoutes from "./utils/ProtectedAuthRoutes";
+import LandingPage from "./pages/Index";
+import Priest from "./pages/Priest";
+import Parish from "./pages/Parish";
 
 const App = () => {
-  return (
-    <Routes>
-      {/* public */}
-      <Route path="/" element={<LandingPage />} />
-      <Route
-        path={AuthLinks[0].linkUser}
-        element={
-          <LogIn state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint }} />
-        }
-      />
-      <Route
-        path={AuthLinks[0].linkPriest}
-        element={
-          <LogIn
-            state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint }}
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route index element={<LandingPage />} />
+        <Route element={<ProtectedAuthRoutes />}>
+          <Route
+            path="/login"
+            element={<LogIn state={AuthAsWho.userNameForBackendEndpoint} />}
           />
-        }
-      />
-      <Route
-        path={AuthLinks[1].linkUser}
-        element={
-          <SignUp state={{ AuthAsWho: AuthAsWho.userNameForBackendEndpoint }} />
-        }
-      />
-      <Route
-        path={AuthLinks[1].linkPriest}
-        element={
-          <SignUp
-            state={{ AuthAsWho: AuthAsWho.priestNameForBackendEndpoint }}
+          <Route
+            path="/login-priest"
+            element={<LogIn state={AuthAsWho.priestNameForBackendEndpoint} />}
           />
-        }
-      />
-
-      {/* private */}
-      <Route path="/create-parish" element={<CreateParish />} />
-    </Routes>
+          <Route
+            path="/register"
+            element={<SignUp state={AuthAsWho.userNameForBackendEndpoint} />}
+          />
+          <Route
+            path="/register-priest"
+            element={<SignUp state={AuthAsWho.priestNameForBackendEndpoint} />}
+          />
+        </Route>
+        {/* <Route element={<ProtectedRoutes />}> */}
+        <Route path="/priest" element={<Priest />} />
+        <Route path="/priest/create-parish" element={<CreateParish />} />
+        <Route path="/priest/parish" element={<Parish />} />
+        {/* </Route> */}
+      </Route>
+    )
   );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

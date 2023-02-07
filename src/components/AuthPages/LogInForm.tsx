@@ -1,22 +1,28 @@
-import React, { InputHTMLAttributes, useEffect, useState } from "react";
-import { AuthAsWho, AuthLinks, LoginData } from "../../constants/auth";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+import { AuthAsWho, LoginData } from "../../constants/auth";
 
 import LoadingSpinner from "../Global/Loading/LoadingSpinner";
-import HeroBackground from "../Global/Hero/HeroBackground";
-import LoginCard from "../Global/UI/Cards/LoginCard";
 
-import styled from "styled-components";
 import AuthBackground from "./AuthBackground";
-import TextDetails from "../Global/UI/TextDetails/TextDetails";
+import TextDetails from "../Global/UI/TextDetails";
 import { bigText } from "../../style/TextSize";
+import { authAction } from "../../store/AuthSlice";
+import ButtonDetails from "../Global/UI/ButtonDetails";
+import InputDetails from "../Global/UI/InputDetails";
+import { BaseURL } from "../../constants/baseURL";
 
 const LogInForm = (props: { whoIsLogin: string }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [enteredMail, setEnteredMail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  console.log(props.whoIsLogin);
   const emailInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setEnteredMail(event.target.value);
   };
@@ -31,19 +37,16 @@ const LogInForm = (props: { whoIsLogin: string }) => {
       setIsLoading(true);
       setError("");
 
-      const res = await fetch(
-        `http://91.227.2.183:83/${props.whoIsLogin}/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: enteredMail,
-            password: enteredPassword,
-          }),
-        }
-      );
+      const res = await fetch(`${BaseURL}/${props.whoIsLogin}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: enteredMail,
+          password: enteredPassword,
+        }),
+      });
       const data = await res.json();
       console.log(data);
       if (!res.ok) {
@@ -55,6 +58,11 @@ const LogInForm = (props: { whoIsLogin: string }) => {
         else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
 
         throw new Error(errorMessage);
+      } else {
+        dispatch(authAction.logIn(props.whoIsLogin));
+        if (props.whoIsLogin === "priest") {
+          navigate("/priest");
+        } else navigate("/");
       }
       // console.log(data.data.jwt)
     } catch (err: any) {
@@ -69,39 +77,43 @@ const LogInForm = (props: { whoIsLogin: string }) => {
         <LoadingSpinner />
       ) : (
         <>
-          <TextDetails text={LoginData[0].text} size={bigText.size} />
-          {/* <BigTextStyle>{LoginData[0].text}</BigTextStyle> */}
+          <TextDetails
+            text={
+              LoginData[0].text +
+              " " +
+              (props.whoIsLogin === "priest"
+                ? AuthAsWho.authAsPriest
+                : AuthAsWho.authAsUser)
+            }
+            size={bigText.size}
+          />
           <FormStyle onSubmit={submitHandler}>
-            <LabelStyle htmlFor={LoginData[1].text}>
-              {LoginData[1].text}
-            </LabelStyle>
-            <input
-              onInput={emailInput}
-              id={LoginData[1].text}
-              type={LoginData[1].type}
-              required
-              placeholder={LoginData[1].placeholder}
+            <InputDetails
+              label={LoginData[1].text}
+              placeholder={LoginData[1].placeholder || ""}
+              id="1"
+              typeOfInput="email"
+              onInputEntering={emailInput}
             />
-            <LabelStyle htmlFor={LoginData[2].text}>
-              {LoginData[2].text}
-            </LabelStyle>
-            <input
-              onInput={passwordInput}
-              id={LoginData[2].text}
-              type={LoginData[2].type}
-              required
-              placeholder={LoginData[2].placeholder}
+            <InputDetails
+              label={LoginData[2].text}
+              placeholder={LoginData[2].placeholder || ""}
+              id="2"
+              typeOfInput="password"
+              onInputEntering={passwordInput}
             />
             <p>{LoginData[3].text}</p>
-            <button type="submit">{LoginData[4].text}</button>
+            <ButtonDetails
+              text={LoginData[4].text}
+              color="#8abaf2"
+              typeOfBtn="submit"
+            ></ButtonDetails>
           </FormStyle>
           <p>
             {LoginData[5].text}
             <Link
               to={
-                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
-                  ? AuthLinks[1].linkPriest
-                  : AuthLinks[1].linkUser
+                props.whoIsLogin === "priest" ? "/register-priest" : "/register"
               }
             >
               {LoginData[5].span}
@@ -119,23 +131,7 @@ export default LogInForm;
 const FormStyle = styled.form`
   display: flex;
   flex-direction: column;
-  & input {
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    border: none;
-    border-bottom: 1px solid #858585;
-    outline: none;
-    padding: 15px;
-    margin: 10px 0 25px 0;
-  }
-  & label {
-    margin: 10px 0;
-  }
 `;
 const ErrorStyle = styled.p`
   color: red;
-`;
-const LabelStyle = styled.label`
-  margin: 0;
-  font-size: 25px;
 `;
