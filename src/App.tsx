@@ -17,7 +17,7 @@ import Priest from "./pages/Priest";
 import Parish from "./pages/Parish";
 
 import Index from "./pages/index";
-import LogIn from "./pages/LogIn";
+import LogIn from "./pages/Login";
 
 const App = () => {
   const router = createBrowserRouter(
