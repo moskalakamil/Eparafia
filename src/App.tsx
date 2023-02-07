@@ -16,13 +16,13 @@ import ProtectedAuthRoutes from "./utils/ProtectedAuthRoutes";
 import Priest from "./pages/Priest";
 import Parish from "./pages/Parish";
 import LogIn from "./pages/LogIn";
-import index as LandingPage from "./pages/index";
+import Index from "./pages/index";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route index element={<LandingPage />} />
+        <Route index element={<Index />} />
         {/* <Route element={<ProtectedAuthRoutes />}> */}
         <Route
           path="/login"
