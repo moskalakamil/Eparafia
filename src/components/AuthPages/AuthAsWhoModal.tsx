@@ -10,38 +10,34 @@ const AuthAsWhoModal = (props: {
   onCloseModal: () => void;
 }) => {
   return (
-    <>
-      {props.authCase !== "" && (
-        <Modal>
-          <>
-            <ButtonStyle color="white">
-              <Link
-                to={props.authCase === "Zaloguj" ? "/login" : "/register"}
-                onClick={props.onCloseModal}
-                state={AuthAsWho.userNameForBackendEndpoint}
-              >
-                {props.authCase + " " + AuthAsWho.authAsUser}
-              </Link>
-            </ButtonStyle>
-            {/* login/register as user */}
-            <ButtonStyle color={secondary}>
-              <Link
-                to={
-                  props.authCase === "Zaloguj"
-                    ? "/login-priest"
-                    : "/register-priest"
-                }
-                onClick={props.onCloseModal}
-                state={AuthAsWho.priestNameForBackendEndpoint}
-              >
-                {props.authCase + " " + AuthAsWho.authAsPriest}
-              </Link>
-            </ButtonStyle>
-            {/* login/register as priest */}
-          </>
-        </Modal>
-      )}
-    </>
+    <Modal>
+      <>
+        <ButtonStyle color="white">
+          <Link
+            to={props.authCase === "Zaloguj" ? "/login" : "/register"}
+            onClick={props.onCloseModal}
+            state={AuthAsWho.userNameForBackendEndpoint}
+          >
+            {props.authCase + " " + AuthAsWho.authAsUser}
+          </Link>
+        </ButtonStyle>
+        {/* login/register as user */}
+        <ButtonStyle color={secondary}>
+          <Link
+            to={
+              props.authCase === "Zaloguj"
+                ? "/login-priest"
+                : "/register-priest"
+            }
+            onClick={props.onCloseModal}
+            state={AuthAsWho.priestNameForBackendEndpoint}
+          >
+            {props.authCase + " " + AuthAsWho.authAsPriest}
+          </Link>
+        </ButtonStyle>
+        {/* login/register as priest */}
+      </>
+    </Modal>
   );
 };
 
@@ -50,6 +46,7 @@ export default AuthAsWhoModal;
 const ButtonStyle = styled.button`
   width: 15vw;
   height: 20vh;
+  margin: 3%;
   background-color: ${(props) => props.color};
   border-radius: 20px;
   border-color: black;

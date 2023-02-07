@@ -12,13 +12,11 @@ export const LoginData = [
   },
   {
     //1
-    type: "email",
     text: "Adres e-mail:",
     placeholder: "Wpisz swój adres e-mail...",
   },
   {
     //2
-    type: "password",
     text: "Hasło:",
     placeholder: "Wpisz swoje hasło...",
   },
@@ -43,25 +41,21 @@ export const SignUpData = [
   },
   {
     //1
-    type: "text",
     text: "Imię:",
     placeholder: "Wpisz swoje imię...",
   },
   {
     //2
-    type: "text",
     text: "Nazwisko:",
     placeholder: "Wpisz swoje nazwisko...",
   },
   {
     //3
-    type: "email",
     text: "Adres e-mail:",
     placeholder: "Wpisz swój adres e-mail...",
   },
   {
     //4
-    type: "tel",
     text: "Numer telefonu:",
     placeholder: "Wpisz swój numer telefonu...",
   },

@@ -8,11 +8,12 @@ import { AuthAsWho, LoginData } from "../../constants/auth";
 import LoadingSpinner from "../Global/Loading/LoadingSpinner";
 
 import AuthBackground from "./AuthBackground";
-import TextDetails from "../Global/UI/TextDetails/TextDetails";
+import TextDetails from "../Global/UI/TextDetails";
 import { bigText } from "../../style/TextSize";
 import { authAction } from "../../store/AuthSlice";
-import AuthInterface from "../../models/authModel";
 import ButtonDetails from "../Global/UI/ButtonDetails";
+import InputDetails from "../Global/UI/InputDetails";
+import { BaseURL } from "../../constants/baseURL";
 
 const LogInForm = (props: { whoIsLogin: string }) => {
   const dispatch = useDispatch();
@@ -32,44 +33,43 @@ const LogInForm = (props: { whoIsLogin: string }) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(authAction.logIn(props.whoIsLogin));
-    if (props.whoIsLogin === "priest") {
-      navigate("/priest");
-    } else navigate("/");
-    //   try {
-    //     setIsLoading(true);
-    //     setError("");
+    try {
+      setIsLoading(true);
+      setError("");
 
-    // const res = await fetch(`${BaseURL + props.whoIsLogin}/login`, {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //           email: enteredMail,
-    //           password: enteredPassword,
-    //         }),
-    //       }
-    //     );
-    //     const data = await res.json();
-    //     console.log(data);
-    //     if (!res.ok) {
-    //       let errorMessage = data.Errors.Message[0];
-    //       if (errorMessage === "User not found")
-    //         errorMessage = "Nie znaleziono użytkownika";
-    //       else if (errorMessage === "Bad password")
-    //         errorMessage = "Błędne hasło, spróbuj ponownie";
-    //       else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
+      const res = await fetch(`${BaseURL}/${props.whoIsLogin}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: enteredMail,
+          password: enteredPassword,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (!res.ok) {
+        let errorMessage = data.Errors.Message[0];
+        if (errorMessage === "User not found")
+          errorMessage = "Nie znaleziono użytkownika";
+        else if (errorMessage === "Bad password")
+          errorMessage = "Błędne hasło, spróbuj ponownie";
+        else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
 
-    //       throw new Error(errorMessage);
-    //     }
-    //dispatch(authAction.logIn(data.data.jwt));
-    //     // console.log(data.data.jwt)
-    //   } catch (err: any) {
-    //     console.log(err);
-    //     setError(err.message);
-    //   }
-    //   setIsLoading(false);
+        throw new Error(errorMessage);
+      } else {
+        dispatch(authAction.logIn(props.whoIsLogin));
+        if (props.whoIsLogin === "priest") {
+          navigate("/priest");
+        } else navigate("/");
+      }
+      // console.log(data.data.jwt)
+    } catch (err: any) {
+      console.log(err);
+      setError(err.message);
+    }
+    setIsLoading(false);
   };
   return (
     <AuthBackground>
@@ -88,25 +88,19 @@ const LogInForm = (props: { whoIsLogin: string }) => {
             size={bigText.size}
           />
           <FormStyle onSubmit={submitHandler}>
-            <LabelStyle htmlFor={LoginData[1].text}>
-              {LoginData[1].text}
-            </LabelStyle>
-            <input
-              onInput={emailInput}
-              id={LoginData[1].text}
-              type={LoginData[1].type}
-              required
-              placeholder={LoginData[1].placeholder}
+            <InputDetails
+              label={LoginData[1].text}
+              placeholder={LoginData[1].placeholder || ""}
+              id="1"
+              typeOfInput="email"
+              onInputEntering={emailInput}
             />
-            <LabelStyle htmlFor={LoginData[2].text}>
-              {LoginData[2].text}
-            </LabelStyle>
-            <input
-              onInput={passwordInput}
-              id={LoginData[2].text}
-              type={LoginData[2].type}
-              required
-              placeholder={LoginData[2].placeholder}
+            <InputDetails
+              label={LoginData[2].text}
+              placeholder={LoginData[2].placeholder || ""}
+              id="2"
+              typeOfInput="password"
+              onInputEntering={passwordInput}
             />
             <p>{LoginData[3].text}</p>
             <ButtonDetails
@@ -137,33 +131,7 @@ export default LogInForm;
 const FormStyle = styled.form`
   display: flex;
   flex-direction: column;
-  & input {
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    border: none;
-    border-bottom: 1px solid #858585;
-    outline: none;
-    padding: 15px;
-    margin: 10px 0 25px 0;
-    &:focus {
-      background-color: #dadada;
-    }
-  }
-  & label {
-    margin: 10px 0;
-  }
 `;
 const ErrorStyle = styled.p`
   color: red;
-`;
-const LabelStyle = styled.label`
-  margin: 0;
-  font-size: 25px;
-`;
-const ButtonStyle = styled.button`
-  background-color: #8abaf2;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 10px;
 `;

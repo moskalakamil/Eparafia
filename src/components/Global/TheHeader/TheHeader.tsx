@@ -66,7 +66,9 @@ const TheHeader = () => {
             <p onClick={logOut}>zalogowano</p>
           </>
         )}
-        <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
+        {authCase !== "" && (
+          <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
+        )}
       </div>
     </HeaderStyle>
   );

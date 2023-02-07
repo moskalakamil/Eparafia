@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { primary } from "../../../../style/Colors";
+import { primary } from "../../../style/Colors";
 interface Props {
   text: string;
   size: string;
   weight?: number;
   underline?: boolean;
   color?: string;
+  align?: string;
   margin?: string;
 }
 const TextDetails = (props: Props) => {
@@ -16,6 +17,7 @@ const TextDetails = (props: Props) => {
       weight={props.weight}
       underline={props.underline}
       color={props.color}
+      align={props.align}
       margin={props.margin}
     >
       {props.text}
@@ -29,7 +31,8 @@ const TextStyle = styled.p<Props>`
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
-  margin-block: ${(props) => props.margin};
+  text-align: ${(props) => props.align};
+  margin: ${(props) => props.margin};
   text-decoration: ${(props) =>
     props.underline === true ? "underline" : "none"};
   text-decoration-color: ${primary};

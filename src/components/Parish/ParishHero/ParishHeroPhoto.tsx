@@ -23,6 +23,5 @@ const ContainerStyle = styled.div`
   & > img {
     position: absolute;
     height: 100%;
-    /* right: 0; */
   }
 `;

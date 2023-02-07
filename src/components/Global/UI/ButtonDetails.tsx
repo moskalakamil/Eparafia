@@ -34,4 +34,5 @@ const ButtonStyle = styled.button<Props>`
   border-radius: 10px;
   margin: 20px 0;
   width: 100%;
+  cursor: pointer;
 `;

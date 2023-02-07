@@ -38,7 +38,7 @@ const ModalStyle = styled.div`
   justify-content: space-between;
   padding: 5% 12%;
   position: fixed;
-  top: 30vh;
+  top: 25vh;
   left: 15%;
   width: 70%;
   z-index: 100;

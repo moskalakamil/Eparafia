@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "../../store/AuthSlice";
 
 import LoadingSpinner from "../Global/Loading/LoadingSpinner";
-import TextDetails from "../Global/UI/TextDetails/TextDetails";
+import TextDetails from "../Global/UI/TextDetails";
 import AuthBackground from "./AuthBackground";
 
 import { AuthAsWho, SignUpData } from "../../constants/auth";
@@ -15,6 +15,7 @@ import AuthInterface from "../../models/authModel";
 import { BaseURL } from "../../constants/baseURL";
 import ButtonDetails from "../Global/UI/ButtonDetails";
 import { secondary } from "../../style/Colors";
+import InputDetails from "../Global/UI/InputDetails";
 
 const SignupForm = (props: { whoIsLogin: string }) => {
   const dispatch = useDispatch();
@@ -66,48 +67,47 @@ const SignupForm = (props: { whoIsLogin: string }) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(authAction.logIn(props.whoIsLogin));
-    if (props.whoIsLogin === "priest") {
-      navigate("/priest");
-    } else navigate("/");
-    //   try {
-    //     setIsLoading(true);
-    //     setError("");
+    try {
+      setIsLoading(true);
+      setError("");
 
-    // const res = await fetch(`${BaseURL + props.whoIsLogin}/register`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: enteredName,
-    //     surname: enteredSurname,
-    //     email: enteredEmail,
-    //     password: enteredPassword,
-    //     confirmPassword: enteredConfirmPassword,
-    //     contact: {
-    //       phoneNumber: enteredPhoneNumber,
-    //       email: enteredEmail,
-    //     },
-    //   }),
-    // });
-    //     const data = await res.json();
+      const res = await fetch(`${BaseURL + props.whoIsLogin}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: enteredName,
+          surname: enteredSurname,
+          email: enteredEmail,
+          password: enteredPassword,
+          confirmPassword: enteredConfirmPassword,
+          contact: {
+            phoneNumber: enteredPhoneNumber,
+            email: enteredEmail,
+          },
+        }),
+      });
+      const data = await res.json();
 
-    //     if (!res.ok) {
-    //       let errorMessage = data.Errors.Password || data.Errors.Email;
-    //       // if (errorMessage === "User not found")
-    //       //   errorMessage = "Nie znaleziono użytkownika";
-    //       // else if (errorMessage === "Bad password")
-    //       //   errorMessage = "Błędne hasło, spróbuj ponownie";
-    //       // else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
+      if (!res.ok) {
+        let errorMessage = data.Errors.Password || data.Errors.Email;
+        // if (errorMessage === "User not found")
+        //   errorMessage = "Nie znaleziono użytkownika";
+        // else if (errorMessage === "Bad password")
+        //   errorMessage = "Błędne hasło, spróbuj ponownie";
+        // else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
 
-    //       throw new Error(errorMessage);
-    //     }
-    //     dispatch(authAction.logIn(data.data.jwt));
-    //   } catch (err: any) {
-    //     setError(err.message);
-    //   }
-    //   setIsLoading(false);
+        throw new Error(errorMessage);
+      }
+      dispatch(authAction.logIn(props.whoIsLogin));
+      if (props.whoIsLogin === "priest") {
+        navigate("/priest");
+      } else navigate("/");
+    } catch (err: any) {
+      setError(err.message);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -127,65 +127,46 @@ const SignupForm = (props: { whoIsLogin: string }) => {
             size={bigText.size}
           />
           <FormStyle onSubmit={submitHandler}>
-            <LabelStyle htmlFor={SignUpData[1].text}>
-              {SignUpData[1].text}
-            </LabelStyle>
-            <input
-              onInput={nameInputHandler}
-              id={SignUpData[1].text}
-              type={SignUpData[1].type}
-              required
-              placeholder={SignUpData[1].placeholder}
+            <InputDetails
+              label={SignUpData[1].text}
+              placeholder={SignUpData[1].placeholder || ""}
+              id="1"
+              onInputEntering={nameInputHandler}
             />
-            <LabelStyle htmlFor={SignUpData[2].text}>
-              {SignUpData[2].text}
-            </LabelStyle>
-            <input
-              onInput={surnameInputHandler}
-              id={SignUpData[2].text}
-              type={SignUpData[2].type}
-              required
-              placeholder={SignUpData[2].placeholder}
+            <InputDetails
+              label={SignUpData[2].text}
+              placeholder={SignUpData[2].placeholder || ""}
+              id="2"
+              onInputEntering={surnameInputHandler}
             />
-            <LabelStyle htmlFor={SignUpData[3].text}>
-              {SignUpData[3].text}
-            </LabelStyle>
-            <input
-              onInput={emailInputHandler}
-              id={SignUpData[3].text}
-              type={SignUpData[3].type}
-              required
-              placeholder={SignUpData[3].placeholder}
+            <InputDetails
+              label={SignUpData[3].text}
+              placeholder={SignUpData[3].placeholder || ""}
+              id="3"
+              typeOfInput="email"
+              onInputEntering={emailInputHandler}
             />
-            <LabelStyle htmlFor={SignUpData[4].text}>
-              {SignUpData[4].text}
-            </LabelStyle>
-            <input
-              onInput={phoneNumberInputHandler}
-              id={SignUpData[4].text}
-              type={SignUpData[4].type}
-              required
-              placeholder={SignUpData[4].placeholder}
+            <InputDetails
+              label={SignUpData[4].text}
+              placeholder={SignUpData[4].placeholder || ""}
+              id="4"
+              typeOfInput="tel"
+              onInputEntering={phoneNumberInputHandler}
             />
-            <LabelStyle htmlFor={SignUpData[5].text}>
-              {SignUpData[5].text}
-            </LabelStyle>
-            <input
-              onInput={passwordInputHandler}
-              id={SignUpData[5].text}
-              type={SignUpData[5].type}
-              required
-              placeholder={SignUpData[5].placeholder}
+            <InputDetails
+              label={SignUpData[5].text}
+              placeholder={SignUpData[5].placeholder || ""}
+              id="5"
+              typeOfInput="password"
+              onInputEntering={passwordInputHandler}
             />
-            <LabelStyle htmlFor={SignUpData[6].text}>
-              {SignUpData[6].text}
-            </LabelStyle>
-            <input
-              onInput={confirmPasswordInputHandler}
-              id={SignUpData[6].text}
-              type={SignUpData[6].type}
-              required
-              placeholder={SignUpData[6].placeholder}
+
+            <InputDetails
+              label={SignUpData[6].text}
+              placeholder={SignUpData[6].placeholder || ""}
+              id="6"
+              typeOfInput="password"
+              onInputEntering={confirmPasswordInputHandler}
             />
             <ButtonDetails
               text={SignUpData[7].text}
