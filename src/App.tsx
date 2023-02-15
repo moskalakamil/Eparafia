@@ -18,36 +18,46 @@ import Parish from "./pages/Parish";
 
 import Index from "./pages/index";
 import LogIn from "./pages/Login";
+import ParishNewsEdit from "./pages/ParishNewsEdit";
+import ParishAnnouncementEdit from "./pages/ParishAnnouncementEdit";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route index element={<Index />} />
-        {/* <Route element={<ProtectedAuthRoutes />}> */}
-        <Route
-          path="/login"
-          element={<LogIn state={AuthAsWho.userNameForBackendEndpoint} />}
-        />
-        <Route
-          path="/login-priest"
-          element={<LogIn state={AuthAsWho.priestNameForBackendEndpoint} />}
-        />
-        <Route
-          path="/register"
-          element={<SignUp state={AuthAsWho.userNameForBackendEndpoint} />}
-        />
-        <Route
-          path="/register-priest"
-          element={<SignUp state={AuthAsWho.priestNameForBackendEndpoint} />}
-        />
-        {/* </Route> */}
+        <Route element={<ProtectedAuthRoutes />}>
+          <Route
+            path="/login"
+            element={<LogIn state={AuthAsWho.userNameForBackendEndpoint} />}
+          />
+          <Route
+            path="/login-priest"
+            element={<LogIn state={AuthAsWho.priestNameForBackendEndpoint} />}
+          />
+          <Route
+            path="/register"
+            element={<SignUp state={AuthAsWho.userNameForBackendEndpoint} />}
+          />
+          <Route
+            path="/register-priest"
+            element={<SignUp state={AuthAsWho.priestNameForBackendEndpoint} />}
+          />
+        </Route>
         {/* <Route element={<ProtectedRoutes />}> */}
         <Route path="/priest" element={<Priest />} />
         <Route path="/priest/create-parish" element={<CreateParish />} />
         <Route path="/priest/parish" element={<Parish />} />
-        {/* </Route> */}
+        <Route
+          path="/priest/parish/edit-news/:id"
+          element={<ParishNewsEdit />}
+        />
+        <Route
+          path="/priest/parish/edit-announcement/:id"
+          element={<ParishAnnouncementEdit />}
+        />
       </Route>
+      // </Route>
     )
   );
   return <RouterProvider router={router} />;

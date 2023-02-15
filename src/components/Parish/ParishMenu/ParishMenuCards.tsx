@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { menuParish } from "../../../constants/Parish";
+import { menuParish } from "../../../constants/parish";
 import { secondary } from "../../../style/Colors";
 import { normalText, bigText } from "../../../style/TextSize";
 import ButtonDetails from "../../Global/UI/ButtonDetails";

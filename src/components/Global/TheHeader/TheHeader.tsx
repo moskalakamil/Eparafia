@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,17 +13,17 @@ import {
 } from "../../../constants/navbar";
 
 import { normalText } from "../../../style/TextSize";
-import AuthInterface from "../../../models/authModel";
-import { authAction } from "../../../store/AuthSlice";
 
 const TheHeader = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
-  const whoIsAuthenticated = useSelector(
-    (state: AuthInterface) => state.auth.whoIsAuthenticated
-  );
-
+  // const whoIsAuthenticated = useSelector(
+  //   (state: AuthInterface) => state.auth.whoIsAuthenticated
+  // );
   const [authCase, setAuthCase] = useState("");
+
+  const isAuthenticated = localStorage.getItem("jwt") !== null ? true : false;
 
   const closeModal = () => {
     setAuthCase("");
@@ -34,7 +34,8 @@ const TheHeader = () => {
   };
 
   const logOut = () => {
-    dispatch(authAction.logOut());
+    localStorage.removeItem("jwt");
+    navigate("/");
   };
 
   return (
@@ -48,7 +49,7 @@ const TheHeader = () => {
             <li key={data.id}>{data.text}</li>
           ))}
         </ul>
-        {whoIsAuthenticated === "" && (
+        {!isAuthenticated && (
           <>
             {LandingNavLinkButton.map((data) => (
               <ButtonStyle
@@ -61,7 +62,7 @@ const TheHeader = () => {
             ))}
           </>
         )}
-        {whoIsAuthenticated !== "" && (
+        {isAuthenticated && (
           <>
             <p onClick={logOut}>zalogowano</p>
           </>

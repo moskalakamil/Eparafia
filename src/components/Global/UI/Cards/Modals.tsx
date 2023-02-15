@@ -13,12 +13,12 @@ const ModalOverlay = (props: { children: JSX.Element }) => {
 
 const Modal = (props: { children: JSX.Element }) => {
   return (
-    <React.Fragment>
+    <>
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         document.getElementById("modal") as HTMLElement
       )}
-    </React.Fragment>
+    </>
   );
 };
 

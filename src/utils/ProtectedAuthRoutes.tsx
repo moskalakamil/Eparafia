@@ -3,9 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import AuthInterface from "../models/authModel";
 
 const ProtectedAuthRoutes = () => {
-  const token = useSelector((state: AuthInterface) => state.auth.token);
+  const token = localStorage.getItem("jwt");
 
-  return token !== "" ? <Navigate to="/" /> : <Outlet />;
+  return token !== null ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default ProtectedAuthRoutes;

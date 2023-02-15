@@ -13,7 +13,7 @@ import { bigText } from "../../style/TextSize";
 import { authAction } from "../../store/AuthSlice";
 import ButtonDetails from "../Global/UI/ButtonDetails";
 import InputDetails from "../Global/UI/InputDetails";
-import { BaseURL } from "../../constants/baseURL";
+import { API_IDENTITY_URL } from "../../constants/ApiURL";
 
 const LogInForm = (props: { whoIsLogin: string }) => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const LogInForm = (props: { whoIsLogin: string }) => {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
   const emailInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setEnteredMail(event.target.value);
   };
@@ -32,12 +33,11 @@ const LogInForm = (props: { whoIsLogin: string }) => {
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
       setIsLoading(true);
       setError("");
 
-      const res = await fetch(`${BaseURL}/${props.whoIsLogin}/login`, {
+      const res = await fetch(`${API_IDENTITY_URL}/${props.whoIsLogin}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,9 +59,12 @@ const LogInForm = (props: { whoIsLogin: string }) => {
 
         throw new Error(errorMessage);
       } else {
-        dispatch(authAction.logIn(props.whoIsLogin));
-        if (props.whoIsLogin === "priest") {
+        dispatch(
+          authAction.logIn({ whoIsLogin: props.whoIsLogin, jwt: data.data.jwt })
+        );
+        if (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint) {
           navigate("/priest");
+          localStorage.setItem("jwt", data.data.jwt);
         } else navigate("/");
       }
       // console.log(data.data.jwt)
@@ -81,7 +84,7 @@ const LogInForm = (props: { whoIsLogin: string }) => {
             text={
               LoginData[0].text +
               " " +
-              (props.whoIsLogin === "priest"
+              (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
                 ? AuthAsWho.authAsPriest
                 : AuthAsWho.authAsUser)
             }
@@ -113,7 +116,9 @@ const LogInForm = (props: { whoIsLogin: string }) => {
             {LoginData[5].text}
             <Link
               to={
-                props.whoIsLogin === "priest" ? "/register-priest" : "/register"
+                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
+                  ? "/register-priest"
+                  : "/register"
               }
             >
               {LoginData[5].span}

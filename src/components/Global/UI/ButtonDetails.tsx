@@ -6,6 +6,7 @@ interface Props {
   text: string;
   color?: string;
   padding?: string;
+  width?: string;
   typeOfBtn?: string;
   type?: any;
 }
@@ -16,6 +17,7 @@ const ButtonDetails = (props: Props) => {
       text=""
       color={props.color}
       padding={props.padding}
+      width={props.width}
       type={props.typeOfBtn || "button"}
     >
       {props.text}
@@ -33,6 +35,6 @@ const ButtonStyle = styled.button<Props>`
   border: 1px solid black;
   border-radius: 10px;
   margin: 20px 0;
-  width: 100%;
+  width: ${(props) => props.width || "100%"};
   cursor: pointer;
 `;
