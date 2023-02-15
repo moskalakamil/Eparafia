@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,7 @@ import AuthBackground from "./AuthBackground";
 import { AuthAsWho, SignUpData } from "../../constants/auth";
 import { bigText } from "../../style/TextSize";
 import AuthInterface from "../../models/authModel";
-import { BaseURL } from "../../constants/baseURL";
+import { API_IDENTITY_URL } from "../../constants/ApiURL";
 import ButtonDetails from "../Global/UI/ButtonDetails";
 import { secondary } from "../../style/Colors";
 import InputDetails from "../Global/UI/InputDetails";
@@ -20,10 +20,6 @@ import InputDetails from "../Global/UI/InputDetails";
 const SignupForm = (props: { whoIsLogin: string }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const whoIsAuthenticated = useSelector(
-    (state: AuthInterface) => state.auth.whoIsAuthenticated
-  );
 
   const [enteredName, setEnteredName] = useState("");
   const [enteredSurname, setEnteredSurname] = useState("");
@@ -71,7 +67,7 @@ const SignupForm = (props: { whoIsLogin: string }) => {
       setIsLoading(true);
       setError("");
 
-      const res = await fetch(`${BaseURL + props.whoIsLogin}/register`, {
+      const res = await fetch(`${API_IDENTITY_URL}/${props.whoIsLogin}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,10 +96,10 @@ const SignupForm = (props: { whoIsLogin: string }) => {
 
         throw new Error(errorMessage);
       }
-      dispatch(authAction.logIn(props.whoIsLogin));
-      if (props.whoIsLogin === "priest") {
-        navigate("/priest");
-      } else navigate("/");
+      // dispatch(authAction.logIn(props.whoIsLogin));
+      if (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint) {
+        navigate("/login-priest");
+      } else navigate("/login");
     } catch (err: any) {
       setError(err.message);
     }
@@ -120,7 +116,7 @@ const SignupForm = (props: { whoIsLogin: string }) => {
             text={
               SignUpData[0].text +
               " " +
-              (props.whoIsLogin === "priest"
+              (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
                 ? AuthAsWho.authAsPriest
                 : AuthAsWho.authAsUser)
             }
@@ -177,7 +173,11 @@ const SignupForm = (props: { whoIsLogin: string }) => {
           <p>
             {SignUpData[8].text}
             <Link
-              to={props.whoIsLogin === "priest" ? "/login-priest" : "/login"}
+              to={
+                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
+                  ? "/login-priest"
+                  : "/login"
+              }
             >
               {SignUpData[8].span}
             </Link>

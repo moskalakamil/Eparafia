@@ -1,8 +1,8 @@
 export const AuthAsWho = {
   authAsUser: "jako parafianin",
   authAsPriest: "jako ksiądz",
-  userNameForBackendEndpoint: "user",
-  priestNameForBackendEndpoint: "priest",
+  userNameForBackendEndpoint: "User",
+  priestNameForBackendEndpoint: "Priest",
 };
 
 export const LoginData = [

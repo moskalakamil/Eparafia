@@ -100,3 +100,24 @@ export const menuParish = [
     ],
   },
 ];
+export const ParishNewsData = {
+  heading: "Ostatnie Aktualności",
+  add: "Dodaj aktualności",
+  readMore: "Czytaj więcej",
+  edit: "Edytuj",
+};
+
+export const ParishEditingNews = {
+  goBack: "Powrót do strony głównej",
+  heading: "Edytuj Aktualności",
+  dateText: "Data kiedy aktualność została dodana:",
+  editTittleText: "Tytuł:",
+  editDescribeText: "Opis:",
+  editPhotoText: "Zdjęcie:",
+  changePhotoText: "Kliknij, aby zmienić zdjęcie",
+};
+export const ParishEditingAnnouncements = {
+  goBack: "Powrót do strony głównej",
+  heading: "Edytuj Ogłoszenia Parafialne",
+  dateText: "Data kiedy ogłoszenie parafialne zostało dodane:",
+};
