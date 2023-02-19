@@ -20,12 +20,14 @@ import Index from "./pages/index";
 import LogIn from "./pages/Login";
 import ParishNewsEdit from "./pages/ParishNewsEdit";
 import ParishAnnouncementEdit from "./pages/ParishAnnouncementEdit";
+import TestPage from "./pages/TestPage";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route index element={<Index />} />
+        <Route path="/test" element={<TestPage />} />
         <Route element={<ProtectedAuthRoutes />}>
           <Route
             path="/login"

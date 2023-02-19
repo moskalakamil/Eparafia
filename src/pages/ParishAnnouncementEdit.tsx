@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ParishHeader from "../components/Global/TheHeader/ParishHeader";
+import Editor from "../components/Parish/ParishAnnouncement/ParishAnnouncementEdit/Editor";
 import ParishAnnouncementEditHeader from "../components/Parish/ParishAnnouncement/ParishAnnouncementEdit/ParishAnnouncementEditHeader";
-import ParishAnnouncementTextEditor from "../components/Parish/ParishAnnouncement/ParishAnnouncementEdit/ParishAnnouncementTextEditor";
 
 const ParishAnnouncementEdit = () => {
+  const [content, setContent] = useState<any>({});
   return (
     <>
       <ParishHeader />
       <ContainerStyle>
         <ParishAnnouncementEditHeader />
-        <ParishAnnouncementTextEditor />
+        <Editor setContent={setContent} />
         {/* <p>{id}</p> */}
       </ContainerStyle>
     </>
