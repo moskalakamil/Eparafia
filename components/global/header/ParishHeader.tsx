@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -12,7 +13,7 @@ const ParishHeader = () => {
   return (
     <HeaderStyle>
       <Link href="/">
-        <img src={LogoData.source} />
+        <Image src={LogoData.source} alt="" width="100" height="100" />
       </Link>
       <div>
         <ul>

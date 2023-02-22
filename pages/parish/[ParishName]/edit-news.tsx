@@ -2,17 +2,9 @@ import ParishHeader from "components/global/header/ParishHeader";
 import NewsEditForm from "components/parish/news/editNews";
 import NewsEditHeader from "components/parish/news/editNews/NewsEditHeading";
 
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import styled from "styled-components";
 
 const ParishNewsEdit = () => {
-  const { query } = useRouter();
-
-  useEffect(() => {
-    console.log(query);
-  }, [query.id]);
-
   return (
     <>
       <ParishHeader />

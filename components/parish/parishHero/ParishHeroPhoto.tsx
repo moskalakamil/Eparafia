@@ -1,9 +1,10 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 const ParishHeroPhoto = () => {
   return (
     <ContainerStyle>
-      <img src="/images/Global/background.png" alt="Zdjęcie koscioła" />
+      <Image src="/images/Global/background.png" alt="Zdjęcie koscioła" fill />
     </ContainerStyle>
   );
 };

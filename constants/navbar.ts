@@ -1,5 +1,5 @@
 export const LogoData = {
-  source: "/images//global/logo.png",
+  source: "/images/global/logo.png",
 };
 export const LandingNavLinkData = [
   {

@@ -11,7 +11,7 @@ const SignUp = () => {
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
     if (!whoIsLoggedIn) push("/login?who=user");
-  }, [query]);
+  }, [query, whoIsLoggedIn]);
 
   return (
     <>

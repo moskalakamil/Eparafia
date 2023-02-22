@@ -1,5 +1,6 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import TextDetails from "components/global/UI/TextDetails";
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 
@@ -24,7 +25,12 @@ const ParishHeroMain = () => {
           size="medium"
           margin="5% 0"
         />
-        <img src="/images/Parish/priest.svg" />
+        <Image
+          src="/images/Parish/priest.svg"
+          alt="priest icon"
+          width={50}
+          height={50}
+        />
       </ChasubleContainerStyle>
       <ButtonDetails
         text="Dodaj ogłoszenia parafialne"
@@ -47,4 +53,9 @@ const ContainerStyle = styled.div`
 `;
 const ChasubleContainerStyle = styled.div`
   display: flex;
+  align-items: center;
+
+  p {
+    margin-right: 3%;
+  }
 `;

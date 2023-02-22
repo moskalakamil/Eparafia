@@ -1,5 +1,6 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import TextDetails from "components/global/UI/TextDetails";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -22,7 +23,7 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <img src="/images/Global/background.png" />
+            <Image src="/images/Global/background.png" alt="background" fill />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -47,7 +48,7 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <img src="/images/Global/background.png" />
+            <Image src="/images/Global/background.png" alt="background" fill />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -72,7 +73,7 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <img src="/images/Global/background.png" />
+            <Image src="/images/Global/background.png" alt="background" fill />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -112,6 +113,7 @@ const NewsCardStyle = styled.div`
   padding: 5%;
 `;
 const ImageDivStyle = styled.div`
+  position: relative;
   margin: 5% 0;
   width: 400px;
   height: 240px;

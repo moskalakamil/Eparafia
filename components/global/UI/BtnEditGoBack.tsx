@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -21,7 +22,15 @@ const BtnEditGoBack = ({
   return (
     <Link href={`/parish/${parishName}`} style={{ textDecoration: "none" }}>
       <ContainerStyle minWidth={minWidthTextVisible + "px"}>
-        <img src="/images/Global/go-back.svg" alt="GoBackIcon" />
+        <div style={{ position: "relative" }}>
+          <Image
+            src="/images/global/go-back.svg"
+            alt="Go back to parish"
+            // fill
+            width="50"
+            height="50"
+          />
+        </div>
         {windowWidth > minWidthTextVisible && (
           <TextDetails
             text={ParishEditingNews.goBack}

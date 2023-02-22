@@ -13,6 +13,8 @@ import {
 import Link from "next/link";
 import AuthAsWhoModal from "components/auth/AuthWhoModal";
 import React, { useState } from "react";
+import Image from "next/image";
+import Spinner from "../loading/Spinner";
 
 // import { normalText } from "../../../style/TextSize";
 
@@ -41,11 +43,10 @@ const LandingHeader = () => {
     // localStorage.removeItem("jwt");
     // navigate("/");
   };
-
   return (
     <HeaderStyle>
       <Link href="/">
-        <img src={LogoData.source} />
+        <Image src={LogoData.source} alt="logo" width="100" height="100" />
       </Link>
       <div>
         <ul>
