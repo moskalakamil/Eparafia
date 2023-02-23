@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST = {__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/parish/create-parish":["static\u002Fchunks\u002Fpages\u002Fparish\u002Fcreate-parish.js"],sortedPages:["\u002F_app","\u002F_error","\u002Fparish\u002Fcreate-parish"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
