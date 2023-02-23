@@ -10,8 +10,8 @@ const SignUp = () => {
   console.log(whoIsLoggedIn);
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
-    if (!whoIsLoggedIn) push("/login?who=user");
-  }, [query, whoIsLoggedIn]);
+    if (!whoIsLoggedIn) push("/register?who=user");
+  }, [query, whoIsLoggedIn, push]);
 
   return (
     <>

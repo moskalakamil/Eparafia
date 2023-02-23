@@ -1,12 +1,16 @@
 import type { AppProps } from "next/app";
 import { Html } from "next/document";
 import Head from "next/head";
+import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global-style";
 import { theme } from "styles/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log("a");
+  useEffect(() => {
+    console.log("run app");
+  }, []);
+
   return (
     <>
       <Head>
@@ -15,7 +19,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div id="modal"></div>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
         <GlobalStyle />

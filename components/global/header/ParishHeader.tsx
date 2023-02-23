@@ -13,7 +13,14 @@ const ParishHeader = () => {
   return (
     <HeaderStyle>
       <Link href="/">
-        <Image src={LogoData.source} alt="" width="100" height="100" />
+        <Image
+          src={LogoData.source}
+          alt="logo"
+          fill
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        />
       </Link>
       <div>
         <ul>
@@ -44,6 +51,12 @@ const HeaderStyle = styled.header`
   top: 0;
   background-color: #636363;
   z-index: 5;
+
+  & > a {
+    position: relative;
+    min-width: 200px;
+    height: 80px;
+  }
 
   & > div {
     display: flex;

@@ -11,38 +11,35 @@ export const createParish = {
 
 export const createParishForm = [
   {
-    id: "0",
     text: "Wezwanie:",
     placeholder: "Wpisz wezwanie parafii...",
   },
   {
-    id: "1",
-    text: "Region parafii?",
+    text: "Region parafii",
     placeholder: "Wpisz region parafii...",
   },
   {
-    id: "2",
+    text: "Miasto parafii",
+    placeholder: "Wpisz miasto parafii...",
+  },
+  {
     text: "Ulica parafii",
     placeholder: "Wpisz ulicę parafii...",
   },
   {
-    id: "3",
     type: "number",
     text: "Numer budynku",
     placeholder: "Wpisz numer budynku parafii...",
   },
   {
-    id: "4",
     text: "Kod pocztowy",
     placeholder: "Wpisz kod pocztowy parafii...",
   },
   {
-    id: "5",
     text: "Numer telefonu",
     placeholder: "Wpisz numer telefonu do parafii...",
   },
   {
-    id: "6",
     text: "Adres email",
     placeholder: "Wpisz adres email parafii...",
   },

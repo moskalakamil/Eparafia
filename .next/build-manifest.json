@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/parish/[ParishName]": [
+    "/parish/create-parish": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/parish/[ParishName].js"
+      "static/chunks/pages/parish/create-parish.js"
     ]
   },
   "ampFirstPages": []

@@ -46,7 +46,14 @@ const LandingHeader = () => {
   return (
     <HeaderStyle>
       <Link href="/">
-        <Image src={LogoData.source} alt="logo" width="100" height="100" />
+        <Image
+          src={LogoData.source}
+          alt="logo"
+          fill
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        />
       </Link>
       <div>
         <ul>
@@ -95,6 +102,12 @@ const HeaderStyle = styled.header`
   background-color: rgba(53, 53, 53, 0.3);
   z-index: 5;
 
+  & > a {
+    position: relative;
+    min-width: 200px;
+    height: 80px;
+  }
+
   & > div {
     display: flex;
     align-items: center;
@@ -102,6 +115,7 @@ const HeaderStyle = styled.header`
     ul {
       list-style: none;
       display: flex;
+      margin-right: 100px;
 
       & li {
         margin: 0 25px;
@@ -111,6 +125,7 @@ const HeaderStyle = styled.header`
     }
   }
 `;
+
 const ButtonStyle = styled.button`
   padding: 15px;
   margin: 0 20px;
