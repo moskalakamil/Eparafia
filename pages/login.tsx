@@ -11,7 +11,7 @@ const Login = () => {
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
     if (!whoIsLoggedIn) push("/login?who=user");
-  }, [query]);
+  }, [query, push, whoIsLoggedIn]);
   return (
     <>
       <LandingHeader />
