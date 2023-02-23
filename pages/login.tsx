@@ -1,7 +1,6 @@
 import LogInForm from "components/auth/LogInForm";
 import LandingHeader from "components/global/header/LandingHeader";
 import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "querystring";
 import React, { useEffect, useState } from "react";
 
 const Login = () => {
@@ -11,15 +10,13 @@ const Login = () => {
 
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
-    // if (!whoIsLoggedIn) push("/login?who=user");
+    if (!whoIsLoggedIn) push("/login?who=user");
   }, [query]);
   return (
     <>
       <LandingHeader />
       <LogInForm whoIsLogin={whoIsLoggedIn} />
-      asdasd
     </>
   );
 };
-
 export default Login;

@@ -3,7 +3,7 @@ import LandingHeader from "components/global/header/LandingHeader";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const SignUp = () => {
+const Register = () => {
   const { query, push } = useRouter();
 
   const [whoIsLoggedIn, setWhoIsLoggedIn] = useState(query.who);
@@ -21,4 +21,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

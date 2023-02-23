@@ -1,9 +1,6 @@
-// import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { useDispatch, useSelector } from "react-redux";
 
-// import Modal from "../UI/Cards/Modals";
-// import AuthAsWhoModal from "../../AuthPages/AuthAsWhoModal";
 
 import {
   LandingNavLinkData,
