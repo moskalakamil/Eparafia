@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // import background from "../../images/global/background.png";
-import background from "/public/images/global/background.png";
+import background from "/images/global/background.png";
 
 interface IProps {
   children?: JSX.Element;
