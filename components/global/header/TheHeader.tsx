@@ -6,18 +6,20 @@ import ParishHeader from "./ParishHeader";
 const TheHeader = () => {
   const { pathname } = useRouter();
 
-  const [isLanding, setIsLanding] = useState(true);
+  const [isLandingHeader, setIsLandingHeader] = useState(true);
 
   useEffect(() => {
-    if (!pathname.includes("/parish/")) return;
-    setIsLanding(true);
-    return () => {
-      setIsLanding(false);
-    };
+    if (
+      !pathname.includes("/parish/") ||
+      pathname === "/parish/create-parish"
+    ) {
+      setIsLandingHeader(true);
+    } else {
+      setIsLandingHeader(false);
+    }
   }, [pathname]);
-  console.log(pathname, isLanding);
 
-  return <>{isLanding ? <LandingHeader /> : <ParishHeader />}</>;
+  return <>{isLandingHeader ? <LandingHeader /> : <ParishHeader />}</>;
 };
 
 export default TheHeader;
