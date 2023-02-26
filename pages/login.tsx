@@ -1,5 +1,5 @@
 import LogInForm from "components/auth/LogInForm";
-import LandingHeader from "components/global/header/LandingHeader";
+import LandingHeader from "components/layout/header/LandingHeader";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -11,10 +11,9 @@ const Login = () => {
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
     if (!whoIsLoggedIn) push("/login?who=user");
-  }, [query]);
+  }, [query, push, whoIsLoggedIn]);
   return (
     <>
-      <LandingHeader />
       <LogInForm whoIsLogin={whoIsLoggedIn} />
     </>
   );

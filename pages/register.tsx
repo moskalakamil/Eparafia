@@ -1,5 +1,5 @@
 import RegisterForm from "components/auth/RegisterForm";
-import LandingHeader from "components/global/header/LandingHeader";
+import LandingHeader from "components/layout/header/LandingHeader";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -15,7 +15,6 @@ const Register = () => {
 
   return (
     <>
-      <LandingHeader />
       <RegisterForm whoIsLogin={whoIsLoggedIn} />
     </>
   );

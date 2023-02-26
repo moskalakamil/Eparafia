@@ -1,7 +1,10 @@
+import Layout from "components/layout";
 import type { AppProps } from "next/app";
 import { Html } from "next/document";
 import Head from "next/head";
 import { useEffect } from "react";
+import { Provider } from "react-redux";
+import store from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global-style";
 import { theme } from "styles/theme";
@@ -20,8 +23,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-        <GlobalStyle />
+        <Provider store={store}>
+          <Layout>
+            <Component {...pageProps} />
+            <GlobalStyle />
+          </Layout>
+        </Provider>
       </ThemeProvider>
     </>
   );
