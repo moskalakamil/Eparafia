@@ -1,14 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 import React from "react";
+import { authAction } from "store/auth-slice";
 
 import styled from "styled-components";
 import { LogoData, ParishNavLinksData } from "../../../constants/navbar";
 
-const ParishHeader = () => {
-  //   const whoIsAuthenticated = useSelector(
-  //     (state: AuthInterface) => state.auth.whoIsAuthenticated
-  //   );
+interface IProps {
+  isAuthenticated: boolean;
+}
+
+const ParishHeader = ({ isAuthenticated }: IProps) => {
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(authAction.logOut);
+  };
 
   return (
     <HeaderStyle>
@@ -28,11 +36,11 @@ const ParishHeader = () => {
             <li key={data.id}>{data.text}</li>
           ))}
         </ul>
-        {/* {whoIsAuthenticated !== "" && (
+        {isAuthenticated && (
           <>
-            <p>zalogowano</p>
+            <p onClick={logOut}>zalogowano</p>
           </>
-        )} */}
+        )}
       </div>
     </HeaderStyle>
   );

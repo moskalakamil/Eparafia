@@ -90,10 +90,6 @@ const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
 
         throw new Error(errorMessage);
       }
-      // dispatch(authAction.logIn(props.whoIsLogin));
-      //   if (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint) {
-      //     navigate("/login-priest");
-      //   } else navigate("/login");
     } catch (err: any) {
       setError(err.message);
     }

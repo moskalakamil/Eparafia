@@ -1,4 +1,4 @@
-import ParishHeader from "components/global/header/ParishHeader";
+import ParishHeader from "components/layout/header/ParishHeader";
 import NewsEditForm from "components/parish/news/editNews";
 import NewsEditHeader from "components/parish/news/editNews/NewsEditHeading";
 

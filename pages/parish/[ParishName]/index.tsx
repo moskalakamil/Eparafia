@@ -1,4 +1,4 @@
-import ParishHeader from "components/global/header/ParishHeader";
+import ParishHeader from "components/layout/header/ParishHeader";
 import News from "components/parish/news";
 import ParishHero from "components/parish/parishHero";
 import MenuCards from "components/parish/parishMenu";

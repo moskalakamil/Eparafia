@@ -12,10 +12,13 @@ import TextDetails from "components/global/UI/TextDetails";
 import InputDetails from "components/global/UI/InputDetails";
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { authAction } from "store/auth-slice";
 
 const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { push } = useRouter();
 
   const [enteredMail, setEnteredMail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -56,16 +59,15 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
         else errorMessage = "Coś poszło nie tak, spróbuj ponownie";
 
         throw new Error(errorMessage);
-        //   } else {
-        //     dispatch(
-        //       authAction.logIn({ whoIsLogin: props.whoIsLogin, jwt: data.data.jwt })
-        //     );
-        //     if (props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint) {
-        //       navigate("/priest");
-        //       localStorage.setItem("jwt", data.data.jwt);
-        //     } else navigate("/");
+      } else {
+        dispatch(authAction.logIn({ jwt: data.data.jwt }));
+        if (
+          props.whoIsLogin ===
+          AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
+        ) {
+          push("/parish");
+        } else push("/");
       }
-      // console.log(data.data.jwt)
     } catch (err: any) {
       console.log(err);
       setError(err.message);

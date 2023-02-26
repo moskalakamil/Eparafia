@@ -17,7 +17,6 @@ const InputDetails = (props: Props) => {
         type={props.typeOfInput || "text"}
         placeholder={props.placeholder}
         onInput={props.onInputEntering}
-        required
       />
     </>
   );

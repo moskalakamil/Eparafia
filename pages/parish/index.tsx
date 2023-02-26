@@ -1,5 +1,5 @@
 import AuthBackground from "components/auth/Background";
-import LandingHeader from "components/global/header/LandingHeader";
+import LandingHeader from "components/layout/header/LandingHeader";
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import TextDetails from "components/global/UI/TextDetails";
 import { createOrJoinParish } from "constants/parish";

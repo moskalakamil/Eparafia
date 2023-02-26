@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   LandingNavLinkData,
@@ -10,22 +10,17 @@ import Link from "next/link";
 import AuthAsWhoModal from "components/auth/AuthWhoModal";
 import React, { useState } from "react";
 import Image from "next/image";
-import Spinner from "../loading/Spinner";
+import Spinner from "../../global/loading/Spinner";
+import { authAction } from "store/auth-slice";
 
-// import { normalText } from "../../../style/TextSize";
+interface IProps {
+  isAuthenticated: boolean;
+}
 
-const LandingHeader = () => {
-  console.log("asd");
-  //   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+const LandingHeader = ({ isAuthenticated }: IProps) => {
+  const dispatch = useDispatch();
 
-  // const whoIsAuthenticated = useSelector(
-  //   (state: AuthInterface) => state.auth.whoIsAuthenticated
-  // );
   const [authCase, setAuthCase] = useState("");
-
-  const isAuthenticated = false;
-  // const isAuthenticated = localStorage.getItem("jwt") !== null ? true : false;
 
   const closeModal = () => {
     setAuthCase("");
@@ -35,9 +30,8 @@ const LandingHeader = () => {
     setAuthCase(text);
   };
 
-  const logOut = () => {
-    // localStorage.removeItem("jwt");
-    // navigate("/");
+  const logOutHandler = () => {
+    dispatch(authAction.logOut());
   };
   return (
     <HeaderStyle>
@@ -72,7 +66,7 @@ const LandingHeader = () => {
         )}
         {isAuthenticated && (
           <>
-            <p onClick={logOut}>zalogowano</p>
+            <p onClick={logOutHandler}>zalogowano</p>
           </>
         )}
         {authCase !== "" && (
@@ -83,7 +77,7 @@ const LandingHeader = () => {
   );
 };
 
-export default React.memo(LandingHeader);
+export default LandingHeader;
 
 const HeaderStyle = styled.header`
   position: fixed;

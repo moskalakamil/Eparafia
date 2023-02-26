@@ -1,4 +1,4 @@
-import TheHeader from "components/global/header/TheHeader";
+import TheHeader from "components/layout/header/TheHeader";
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
