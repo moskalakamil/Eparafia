@@ -49,6 +49,7 @@ const HeaderStyle = styled.header`
   align-items: center;
   justify-content: space-between;
   top: 0;
+  left: 0;
   background-color: #636363;
   z-index: 5;
 

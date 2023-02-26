@@ -10,19 +10,13 @@ const AnnouncementEditHeader = () => {
 
   const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
-    setWindowWidth(
-      window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth
-    );
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+    }
   }, []);
   if (typeof window !== "undefined") {
     window.addEventListener("resize", () => {
-      setWindowWidth(
-        window.innerWidth ||
-          document.documentElement.clientWidth ||
-          document.body.clientWidth
-      );
+      setWindowWidth(window.innerWidth);
     });
   }
   return (

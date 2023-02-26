@@ -14,7 +14,6 @@ const Login = () => {
   }, [query, push, whoIsLoggedIn]);
   return (
     <>
-      <LandingHeader />
       <LogInForm whoIsLogin={whoIsLoggedIn} />
     </>
   );

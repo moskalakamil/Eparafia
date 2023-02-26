@@ -15,7 +15,6 @@ const Register = () => {
 
   return (
     <>
-      <LandingHeader />
       <RegisterForm whoIsLogin={whoIsLoggedIn} />
     </>
   );

@@ -1,3 +1,4 @@
+import Layout from "components/layout";
 import type { AppProps } from "next/app";
 import { Html } from "next/document";
 import Head from "next/head";
@@ -20,8 +21,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-        <GlobalStyle />
+        <Layout>
+          <Component {...pageProps} />
+          <GlobalStyle />
+        </Layout>
       </ThemeProvider>
     </>
   );

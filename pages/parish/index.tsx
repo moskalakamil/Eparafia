@@ -1,4 +1,3 @@
-
 import AuthBackground from "components/auth/Background";
 import LandingHeader from "components/global/header/LandingHeader";
 import ButtonDetails from "components/global/UI/ButtonDetails";
@@ -10,7 +9,6 @@ import styled from "styled-components";
 const Priest = () => {
   return (
     <>
-      <LandingHeader />
       <AuthBackground>
         <ContainerStyle>
           <div>

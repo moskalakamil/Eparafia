@@ -73,7 +73,6 @@ const CreateParish = () => {
   };
   return (
     <>
-      <LandingHeader />
       <ContainerStyle>
         <TextDetails
           text={createParish.headingText}

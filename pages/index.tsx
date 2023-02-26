@@ -8,7 +8,6 @@ import HeroBackground from "components/global/hero/HeroBackground";
 export default function Home() {
   return (
     <>
-      <LandingHeader />
       <HeroBackground isLandingPage={true} />
     </>
   );
