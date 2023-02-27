@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { AuthAsWho, SignUpData } from "../../constants/auth";
 
 import { API_IDENTITY_URL } from "../../constants/ApiURL";
-import AuthBackground from "./Background";
+import AuthBackground from "../global/UI/Background";
 import Spinner from "components/global/loading/Spinner";
 import TextDetails from "components/global/UI/TextDetails";
 import InputDetails from "components/global/UI/InputDetails";

@@ -7,6 +7,7 @@ import { createParish } from "constants/parish";
 import { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Spinner from "components/global/loading/Spinner";
 
 interface ISubmitProps {
   callName: string;
@@ -40,7 +41,7 @@ const CreateParish = () => {
     phoneNumber,
     mail,
   }: ISubmitProps) => {
-    console.log(jwt.jwt);
+    console.log(jwt);
     try {
       setIsLoading(true);
       setError("");
@@ -48,7 +49,7 @@ const CreateParish = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt.jwt}`,
+          Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify({
           callName,
@@ -78,32 +79,36 @@ const CreateParish = () => {
     setIsLoading(false);
   };
   return (
-    <>
-      <ContainerStyle>
-        <TextDetails
-          text={createParish.headingText}
-          size="large"
-          weight="large"
-          underline={true}
-          margin={"3%"}
-        />
-        <WrapperStyle>
+    <ContainerStyle>
+      {error ? (
+        <Spinner />
+      ) : (
+        <>
           <TextDetails
-            text={createParish.text}
-            size="medium"
-            color="primary"
-            align="center"
+            text={createParish.headingText}
+            size="large"
+            weight="large"
+            underline={true}
+            margin={"3%"}
           />
-          <CreateParishPagination
-            currentPage={currentPage}
-            changePage={changePage}
-          />
-          {currentPage === 1 && (
-            <CreateFirstStep submitHandler={submitHandler} />
-          )}
-        </WrapperStyle>
-      </ContainerStyle>
-    </>
+          <WrapperStyle>
+            <TextDetails
+              text={createParish.text}
+              size="medium"
+              color="primary"
+              align="center"
+            />
+            <CreateParishPagination
+              currentPage={currentPage}
+              changePage={changePage}
+            />
+            {currentPage === 1 && (
+              <CreateFirstStep submitHandler={submitHandler} />
+            )}
+          </WrapperStyle>
+        </>
+      )}
+    </ContainerStyle>
   );
 };
 

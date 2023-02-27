@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styled from "styled-components";
-// import background from "../../images/global/background.png";
 
 interface IProps {
   children?: JSX.Element;
@@ -10,13 +9,14 @@ interface IProps {
 const HeroBackground = ({ children, isLandingPage }: IProps) => {
   return (
     <BackgroundImageStyle isLandingPage={isLandingPage}>
-      <Image src="/images/global/background.png" alt="" fill />
+      <Image src="/images/global/background.png" alt="" fill priority={true} />
       {children}
     </BackgroundImageStyle>
   );
 };
 
 export default HeroBackground;
+
 interface IStyleProps {
   isLandingPage?: boolean;
 }

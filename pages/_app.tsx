@@ -1,6 +1,5 @@
 import Layout from "components/layout";
 import type { AppProps } from "next/app";
-import { Html } from "next/document";
 import Head from "next/head";
 import { useEffect } from "react";
 import { Provider } from "react-redux";

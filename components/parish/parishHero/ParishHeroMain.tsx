@@ -4,11 +4,15 @@ import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 
-const ParishHeroMain = () => {
+interface IProps {
+  callname: string;
+}
+
+const ParishHeroMain = ({ callname }: IProps) => {
   return (
     <ContainerStyle>
       <TextDetails
-        text={"Parafia jakas tam"}
+        text={callname}
         size="xlarge"
         weight="xlarge"
         underline={true}

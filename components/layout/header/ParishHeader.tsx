@@ -15,7 +15,7 @@ const ParishHeader = ({ isAuthenticated }: IProps) => {
   const dispatch = useDispatch();
 
   const logOut = () => {
-    dispatch(authAction.logOut);
+    dispatch(authAction.logOut());
   };
 
   return (
