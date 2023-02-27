@@ -60,7 +60,7 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
 
         throw new Error(errorMessage);
       } else {
-        dispatch(authAction.logIn({ jwt: data.data.jwt }));
+        dispatch(authAction.logIn(data.data.jwt));
         if (
           props.whoIsLogin ===
           AuthAsWho.priestNameForBackendEndpoint.toLowerCase()

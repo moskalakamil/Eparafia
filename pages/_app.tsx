@@ -4,7 +4,8 @@ import { Html } from "next/document";
 import Head from "next/head";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
-import store from "store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import store, { persistor } from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global-style";
 import { theme } from "styles/theme";
@@ -24,10 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Layout>
-            <Component {...pageProps} />
-            <GlobalStyle />
-          </Layout>
+          <PersistGate persistor={persistor}>
+            <Layout>
+              <Component {...pageProps} />
+              <GlobalStyle />
+            </Layout>
+          </PersistGate>
         </Provider>
       </ThemeProvider>
     </>
