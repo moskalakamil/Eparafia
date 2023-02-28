@@ -17,7 +17,7 @@ const Parish = (props: any) => {
 export default Parish;
 
 export const loadParishes = async () => {
-  // const res = await fetch(`${process.env.API_URL}/Parish`, {
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Parish`, {
   //   headers: {
   //     "Content-Type": "application/json",
 

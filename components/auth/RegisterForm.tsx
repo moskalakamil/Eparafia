@@ -61,7 +61,7 @@ const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
       setError("");
 
       const res = await fetch(
-        `${process.env.API_IDENTITY_URL}/${props.whoIsLogin}`,
+        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${props.whoIsLogin}`,
         {
           method: "POST",
           headers: {

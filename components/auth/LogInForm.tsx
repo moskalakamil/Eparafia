@@ -13,8 +13,13 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { authAction } from "store/auth-slice";
+import { GetServerSideProps } from "next";
 
-const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
+interface IProps {
+  whoIsLogin: string | string[] | undefined;
+}
+
+const LogInForm = ({ whoIsLogin }: IProps) => {
   const dispatch = useDispatch();
   const { push } = useRouter();
 
@@ -37,7 +42,8 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
       setError("");
 
       const res = await fetch(
-        `${process.env.API_IDENTITY_URL}/${props.whoIsLogin}/login`,
+        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${whoIsLogin}/login`,
+
         {
           method: "POST",
           headers: {
@@ -63,14 +69,13 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
       } else {
         dispatch(authAction.logIn(data.data.jwt));
         if (
-          props.whoIsLogin ===
-          AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
+          whoIsLogin === AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
         ) {
           push("/parish");
         } else push("/");
       }
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
       setError(err.message);
     }
     setIsLoading(false);
@@ -85,7 +90,7 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
             text={
               LoginData[0].text +
               " " +
-              (props.whoIsLogin ===
+              (whoIsLogin ===
               AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
                 ? AuthAsWho.authAsPriest
                 : AuthAsWho.authAsUser)
@@ -118,7 +123,7 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
             {LoginData[5].text}
             <Link
               href={
-                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
+                whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
                   ? "/register?who=priest"
                   : "/register?who=user"
               }
