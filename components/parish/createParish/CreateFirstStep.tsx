@@ -1,6 +1,5 @@
 import Spinner from "components/global/loading/Spinner";
 import InputDetails from "components/global/UI/InputDetails";
-import { API_URL } from "constants/ApiURL";
 import { createParishForm } from "constants/parish";
 import { useRouter } from "next/router";
 import React, { useState } from "react";

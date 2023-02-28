@@ -10,22 +10,22 @@ const NewsEditHeader = () => {
   console.log(query.ParishName);
 
   const [windowWidth, setWindowWidth] = useState(0);
-  useEffect(() => {
-    setWindowWidth(
-      window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth
-    );
-  }, []);
-  if (typeof window !== "undefined") {
-    window.addEventListener("resize", () => {
-      setWindowWidth(
-        window.innerWidth ||
-          document.documentElement.clientWidth ||
-          document.body.clientWidth
-      );
-    });
-  }
+  // useEffect(() => {
+  //   setWindowWidth(
+  //     window.innerWidth ||
+  //       document.documentElement.clientWidth ||
+  //       document.body.clientWidth
+  //   );
+  // }, []);
+  // if (typeof window !== "undefined") {
+  //   window.addEventListener("resize", () => {
+  //     setWindowWidth(
+  //       window.innerWidth ||
+  //         document.documentElement.clientWidth ||
+  //         document.body.clientWidth
+  //     );
+  //   });
+  // }
   return (
     <HeadingOfEditingNewsStyle>
       <BtnEditGoBack

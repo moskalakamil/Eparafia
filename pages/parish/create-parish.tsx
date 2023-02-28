@@ -2,7 +2,6 @@ import LandingHeader from "components/layout/header/LandingHeader";
 import TextDetails from "components/global/UI/TextDetails";
 import CreateFirstStep from "components/parish/createParish/CreateFirstStep";
 import CreateParishPagination from "components/parish/createParish/CreateParishPagination";
-import { API_URL } from "constants/ApiURL";
 import { createParish } from "constants/parish";
 import { useState } from "react";
 import styled from "styled-components";
@@ -45,7 +44,7 @@ const CreateParish = () => {
     try {
       setIsLoading(true);
       setError("");
-      const res = await fetch(`${API_URL}/Parish`, {
+      const res = await fetch(`${process.env.API_URL}/Parish`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

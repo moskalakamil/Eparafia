@@ -10,7 +10,6 @@ import Link from "next/link";
 import AuthAsWhoModal from "components/auth/AuthWhoModal";
 import React, { useState } from "react";
 import Image from "next/image";
-import Spinner from "../../global/loading/Spinner";
 import { authAction } from "store/auth-slice";
 
 interface IProps {

@@ -5,8 +5,6 @@ import Spinner from "components/global/loading/Spinner";
 // import { useDispatch } from "react-redux";
 
 import { AuthAsWho, LoginData } from "../../constants/auth";
-
-import { API_IDENTITY_URL } from "../../constants/ApiURL";
 import AuthBackground from "../global/UI/Background";
 import TextDetails from "components/global/UI/TextDetails";
 import InputDetails from "components/global/UI/InputDetails";
@@ -38,16 +36,19 @@ const LogInForm = (props: { whoIsLogin: string | string[] | undefined }) => {
       setIsLoading(true);
       setError("");
 
-      const res = await fetch(`${API_IDENTITY_URL}/${props.whoIsLogin}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: enteredMail,
-          password: enteredPassword,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.API_IDENTITY_URL}/${props.whoIsLogin}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: enteredMail,
+            password: enteredPassword,
+          }),
+        }
+      );
       const data = await res.json();
       console.log(data);
       if (!res.ok) {

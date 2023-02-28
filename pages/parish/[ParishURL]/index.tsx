@@ -2,13 +2,12 @@ import News from "components/parish/news";
 import ParishHero from "components/parish/parishHero";
 import MenuCards from "components/parish/parishMenu";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { API_URL } from "constants/ApiURL";
 import { useSelector } from "react-redux";
 
 const Parish = (props: any) => {
   return (
     <>
-      <ParishHero callname={props.data.callName} />
+      <ParishHero callname="asd" />
       <MenuCards />
       <News />
     </>
@@ -18,21 +17,42 @@ const Parish = (props: any) => {
 export default Parish;
 
 export const loadParishes = async () => {
-  // const jwt = useSelector((state: any) => {
-  //   state.auth.token;
-  // });
-  // console.log(jwt);
+  // const res = await fetch(`${process.env.API_URL}/Parish`, {
+  //   headers: {
+  //     "Content-Type": "application/json",
 
-  const res = await fetch(`${API_URL}/Parish`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjYyNzRmMTg5LWRkYmEtNDU1MS05NTY5LThmY2JkMmRmNjVkMSIsIk5hbWUiOiJUZXN0IiwiU3VybmFtZSI6IkphbmVrIiwiRW1haWwiOiJyemVqYW5AZ21haWwuY29tIiwicm9sZSI6IlByaWVzdCIsIm5iZiI6MTY3NzUzOTY1MiwiZXhwIjoxNjc3NTQxNDUyLCJpYXQiOjE2Nzc1Mzk2NTIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.mBYgvGsk1_V_QGXvUFN08vRcn4lGOoR-vjDrJE_kRVGa_behXm2kpUxSNRexBt2sXpsddkqfJGZFibTpqbz8hQ`,
+  //   },
+  // });
+  // const data = await res.json();
+  // console.log(data);
+  // return data;
+  return {
+    statusCode: 200,
+    data: {
+      id: "4136506c-81d9-4945-a947-dba7b9fc4a60",
+      callName: "Św Apostołów Szymona i Judy Tadeusza",
+      contact: { phoneNumber: "123123123", email: "rzejan@gmail.com" },
+      address: {
+        region: "Krakowska",
+        city: "Skawina",
+        street: "Kopścielna",
+        buildingNumber: "1",
+        postCode: "32-050",
+      },
+      priests: [
+        {
+          id: "6274f189-ddba-4551-9569-8fcbd2df65d1",
+          name: "Test Janek",
+          photo: {
+            path: "",
+            pathMin: "",
+          },
+          functionParish: 0,
+        },
+      ],
     },
-  });
-  const data = await res.json();
-  console.log(data);
-  return data;
-  // return ["a", "b", "c", "d"];
+    errors: null,
+  };
 };
 
 export const getStaticProps: GetStaticProps = async (contex) => {
@@ -47,8 +67,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // const res = await fetch("");
   // const parishes = await res.json();
 
-  // const paths = posts.map((post) => ({
-  //   params: { id: post.id },
+  // const paths = parishes.map((parish) => ({
+  //   params: { ParishURL: parish.url },
   // }));
   const paths = [
     { params: { ParishURL: "a" } },
