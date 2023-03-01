@@ -1,5 +1,6 @@
 import LogInForm from "components/auth/LogInForm";
 import LandingHeader from "components/layout/header/LandingHeader";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 

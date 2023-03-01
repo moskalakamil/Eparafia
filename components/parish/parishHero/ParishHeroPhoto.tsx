@@ -8,6 +8,7 @@ const ParishHeroPhoto = () => {
         src="/images/global/background.png"
         alt="Zdjęcie koscioła"
         fill
+        priority={true}
         sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"

@@ -7,8 +7,13 @@ import { authAction } from "store/auth-slice";
 
 const TheHeader = (props: any) => {
   const dispatch = useDispatch();
+  const token = useSelector((state: any) => state.auth.token);
+  const [jwt, setJwt] = useState("");
 
-  const jwt = useSelector((state: any) => state.auth.token);
+  useEffect(() => {
+    setJwt(token);
+  }, [token]);
+
   console.log("the");
 
   const { pathname } = useRouter();

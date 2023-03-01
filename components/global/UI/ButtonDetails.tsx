@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 // import { bigText, normalText, extraBigText } from "../../../style/TextSize";
 
 interface IProps {
@@ -12,14 +12,15 @@ interface IProps {
 
 const ButtonDetails = ({ text, color, padding, width, typeOfBtn }: IProps) => {
   return (
-    <ButtonStyle
-      color={color}
-      padding={padding}
-      width={width}
-      type={typeOfBtn || "button"}
-    >
-      {text}
-    </ButtonStyle>
+    <p>d</p>
+    // <ButtonStyle
+    //   color={color}
+    //   padding={padding}
+    //   width={width}
+    //   type={typeOfBtn || 'button'}
+    // >
+    //   {text}
+    // </ButtonStyle>
   );
 };
 
@@ -40,19 +41,19 @@ interface IStyledProps {
 const ButtonStyle = styled.button.attrs(
   ({ color, theme }: IStyledAttrsProps) => ({
     color:
-      color === "primary"
+      color === 'primary'
         ? theme.colors.primary
-        : color === "secondary"
+        : color === 'secondary'
         ? theme.colors.secondary
         : color,
-  })
+  }),
 )<IStyledProps>`
   background-color: ${(props) => props.color};
-  padding: ${(props) => props.padding || "15px"};
+  padding: ${(props) => props.padding || '15px'};
 
   border: 1px solid black;
   border-radius: 10px;
   margin: 20px 0;
-  width: ${(props) => props.width || "100%"};
+  width: ${(props) => props.width || '100%'};
   cursor: pointer;
 `;

@@ -1,17 +1,16 @@
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 import {
   LandingNavLinkData,
   LandingNavLinkButton,
   LogoData,
-} from "constants/navbar";
-import Link from "next/link";
-import AuthAsWhoModal from "components/auth/AuthWhoModal";
-import React, { useState } from "react";
-import Image from "next/image";
-import Spinner from "../../global/loading/Spinner";
-import { authAction } from "store/auth-slice";
+} from 'constants/navbar';
+import Link from 'next/link';
+import AuthAsWhoModal from 'components/auth/AuthWhoModal';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { authAction } from 'store/auth-slice';
 
 interface IProps {
   isAuthenticated: boolean;
@@ -20,10 +19,10 @@ interface IProps {
 const LandingHeader = ({ isAuthenticated }: IProps) => {
   const dispatch = useDispatch();
 
-  const [authCase, setAuthCase] = useState("");
+  const [authCase, setAuthCase] = useState('');
 
   const closeModal = () => {
-    setAuthCase("");
+    setAuthCase('');
   };
 
   const correctLink = (text: string) => {
@@ -69,7 +68,7 @@ const LandingHeader = ({ isAuthenticated }: IProps) => {
             <p onClick={logOutHandler}>zalogowano</p>
           </>
         )}
-        {authCase !== "" && (
+        {authCase !== '' && (
           <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
         )}
       </div>
@@ -90,7 +89,7 @@ const HeaderStyle = styled.header`
   top: 0;
   left: 0;
   background-color: rgba(53, 53, 53, 0.3);
-  z-index: 5;
+  z-index: 15;
 
   & > a {
     position: relative;

@@ -561,9 +561,17 @@
     "@types/draft-js" "*"
     "@types/react" "*"
 
-"@types/draft-js@*", "@types/draft-js@^0.11.10":
+"@types/draft-js@*":
   version "0.11.10"
   resolved "https://registry.npmjs.org/@types/draft-js/-/draft-js-0.11.10.tgz"
+  integrity sha512-o/DST8x0wNerwhRiaE577UHFIXb6HCywaZOZfj9TF2vU3CONvsCGoQmdOsKqERdXp+3ZNlSvFUH0B8lEEYOT4A==
+  dependencies:
+    "@types/react" "*"
+    immutable "~3.7.4"
+
+"@types/draft-js@^0.11.10":
+  version "0.11.10"
+  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.11.10.tgz#46cf41e142b4b572467f7a78269a630a77e1f19c"
   integrity sha512-o/DST8x0wNerwhRiaE577UHFIXb6HCywaZOZfj9TF2vU3CONvsCGoQmdOsKqERdXp+3ZNlSvFUH0B8lEEYOT4A==
   dependencies:
     "@types/react" "*"
@@ -611,7 +619,7 @@
 
 "@types/react-draft-wysiwyg@^1.13.4":
   version "1.13.4"
-  resolved "https://registry.npmjs.org/@types/react-draft-wysiwyg/-/react-draft-wysiwyg-1.13.4.tgz"
+  resolved "https://registry.yarnpkg.com/@types/react-draft-wysiwyg/-/react-draft-wysiwyg-1.13.4.tgz#df951c76afb47e311061d363f41a10c76de04ac8"
   integrity sha512-wasD1t78JDmQvdPDRPf/mf5FSHMlncunW0F6KMOKB3awzi3Wi21yHMGsRAUOkfTr3R8F+yceG8fSLz0kYWu/QA==
   dependencies:
     "@types/draft-js" "*"
@@ -2388,6 +2396,11 @@ jsonparse@^1.2.0:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
 
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
+
 kind-of@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
@@ -3066,6 +3079,11 @@ redent@^3.0.0:
   dependencies:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
+
+redux-persist@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
 
 redux-thunk@^2.4.2:
   version "2.4.2"

@@ -3,10 +3,14 @@ import styled from "styled-components";
 import ParishHeroPhoto from "./ParishHeroPhoto";
 import ParishHeroMain from "./ParishHeroMain";
 
-const ParishHero = () => {
+interface IProps {
+  callname: string;
+}
+
+const ParishHero = ({ callname }: IProps) => {
   return (
     <HeroContainerStyle>
-      <ParishHeroMain />
+      <ParishHeroMain callname={callname} />
       <ParishHeroPhoto />
     </HeroContainerStyle>
   );

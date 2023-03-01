@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 import { AuthAsWho, SignUpData } from "../../constants/auth";
 
-import { API_IDENTITY_URL } from "../../constants/ApiURL";
-import AuthBackground from "./Background";
+import AuthBackground from "../global/UI/Background";
 import Spinner from "components/global/loading/Spinner";
 import TextDetails from "components/global/UI/TextDetails";
 import InputDetails from "components/global/UI/InputDetails";
@@ -61,23 +60,26 @@ const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
       setIsLoading(true);
       setError("");
 
-      const res = await fetch(`${API_IDENTITY_URL}/${props.whoIsLogin}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: enteredName,
-          surname: enteredSurname,
-          email: enteredEmail,
-          password: enteredPassword,
-          confirmPassword: enteredConfirmPassword,
-          contact: {
-            phoneNumber: enteredPhoneNumber,
-            email: enteredEmail,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${props.whoIsLogin}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-      });
+          body: JSON.stringify({
+            name: enteredName,
+            surname: enteredSurname,
+            email: enteredEmail,
+            password: enteredPassword,
+            confirmPassword: enteredConfirmPassword,
+            contact: {
+              phoneNumber: enteredPhoneNumber,
+              email: enteredEmail,
+            },
+          }),
+        }
+      );
       const data = await res.json();
 
       if (!res.ok) {

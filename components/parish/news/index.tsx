@@ -23,7 +23,15 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <Image src="/images/Global/background.png" alt="background" fill />
+            <Image
+              src="/images/global/background.png"
+              alt="background"
+              fill
+              priority={true}
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -48,7 +56,15 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <Image src="/images/Global/background.png" alt="background" fill />
+            <Image
+              src="/images/global/background.png"
+              alt="background"
+              fill
+              priority={true}
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -73,7 +89,15 @@ const News = () => {
             align="center"
           />
           <ImageDivStyle>
-            <Image src="/images/Global/background.png" alt="background" fill />
+            <Image
+              src="/images/global/background.png"
+              alt="background"
+              fill
+              priority={true}
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+            />
           </ImageDivStyle>
           <TextStyle>
             {
@@ -117,11 +141,6 @@ const ImageDivStyle = styled.div`
   margin: 5% 0;
   width: 400px;
   height: 240px;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
 `;
 const TextStyle = styled.p`
   font-size: ${(props) => props.theme.fontSizes.small.pc};

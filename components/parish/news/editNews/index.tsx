@@ -1,4 +1,5 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { ParishEditingNews } from "../../../../constants/parish";
@@ -14,7 +15,12 @@ const NewsEditForm = () => {
         <InputContainerStyle>
           <label>{ParishEditingNews.editPhotoText}</label>
           <PhotoDivStyle>
-            <ImgStyle src="/images/Global/background.png"></ImgStyle>
+            <Image
+              src="/images/global/background.png"
+              alt=""
+              width={400}
+              height={240}
+            ></Image>
             <ButtonDetails text={ParishEditingNews.changePhotoText} />
           </PhotoDivStyle>
         </InputContainerStyle>
@@ -57,6 +63,7 @@ const InputContainerStyle = styled.div`
   }
 `;
 const PhotoDivStyle = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;

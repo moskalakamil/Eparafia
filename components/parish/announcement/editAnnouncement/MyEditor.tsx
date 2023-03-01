@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { EditorState } from "draft-js";
+import { EditorProps } from "react-draft-wysiwyg";
+import dynamic from "next/dynamic";
+import { convertToHTML } from "draft-convert";
+import styled from "styled-components";
 const Editor = dynamic(
   () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
   { ssr: false }
 );
-// import { Editor } from "react-draft-wysiwyg";
-import { convertToHTML } from "draft-convert";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import styled from "styled-components";
-import dynamic from "next/dynamic";
-// import "./App.css";
 
 function Test() {
-  const NumberOfEditors = 5;
+  // const NumberOfEditors = 5;
+  const [convertedContent, setConvertedContent]: any = useState();
   const [isFocus, setIsFocus] = useState(false);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [convertedContent, setConvertedContent]: any = useState();
   useEffect(() => {
     console.log(convertToHTML(editorState.getCurrentContent()));
     setConvertedContent(convertToHTML(editorState.getCurrentContent()));
