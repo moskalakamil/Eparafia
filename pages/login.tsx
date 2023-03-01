@@ -8,7 +8,7 @@ const Login = () => {
   const { query, push } = useRouter();
 
   const [whoIsLoggedIn, setWhoIsLoggedIn] = useState(query.who);
-  console.log(process.env.NEXT_PUBLIC_IDENTITY_URL);
+
   useEffect(() => {
     setWhoIsLoggedIn(query.who);
     if (!whoIsLoggedIn) push("/login?who=user");

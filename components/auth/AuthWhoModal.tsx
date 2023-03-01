@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { AuthAsWho } from "constants/auth";
-import Modal from "components/global/UI/cards/Modal";
+import styled from 'styled-components';
+import Modal from 'components/global/UI/cards/Modal';
 // import { smallText } from "../../style/TextSize";
 // import { secondary } from "../../style/Colors";
-import Link from "next/link";
+import Link from 'next/link';
+import { AuthAsWho } from 'constants/auth';
 
 const AuthAsWhoModal = (props: {
   authCase: string;
@@ -15,24 +15,24 @@ const AuthAsWhoModal = (props: {
         <ButtonStyle>
           <Link
             href={`${
-              props.authCase === "Zaloguj" ? "/login" : "/register"
+              props.authCase === 'Zaloguj' ? '/login' : '/register'
             }?who=user`}
             onClick={props.onCloseModal}
             // state={AuthAsWho.userNameForBackendEndpoint}
           >
-            {props.authCase + " " + AuthAsWho.authAsUser}
+            {props.authCase + ' ' + AuthAsWho.authAsUser}
           </Link>
         </ButtonStyle>
         {/* login/register as user */}
         <ButtonStyle isColor={true}>
           <Link
             href={`${
-              props.authCase === "Zaloguj" ? "/login" : "/register"
+              props.authCase === 'Zaloguj' ? '/login' : '/register'
             }?who=priest`}
             onClick={props.onCloseModal}
             // state={AuthAsWho.priestNameForBackendEndpoint}
           >
-            {props.authCase + " " + AuthAsWho.authAsPriest}
+            {props.authCase + ' ' + AuthAsWho.authAsPriest}
           </Link>
         </ButtonStyle>
         {/* login/register as priest */}
@@ -48,7 +48,7 @@ const ButtonStyle = styled.button<{ isColor?: boolean }>`
   height: 20vh;
   margin: 3%;
   background-color: ${(props) =>
-    props.isColor ? (props) => props.theme.colors.secondary : "white"};
+    props.isColor ? (props) => props.theme.colors.secondary : 'white'};
   border-radius: 20px;
   border-color: black;
   font-size: ${(props) => props.theme.fontSizes.small};
