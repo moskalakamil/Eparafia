@@ -1,14 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import jwt from "jwt-decode";
 
-interface IInitialState {
-  token: string | null;
-  id: string | null;
-  email: string | null;
-  name: string | null;
-  surname: string | null;
-  role: string | null;
-}
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import jwt from "jwt-decode";
+import { useSelector } from "react-redux";
 
 interface IJwtState {
   Id: string;
@@ -23,33 +16,97 @@ interface IJwtState {
   nbf: number;
 }
 
+interface IInitialState {
+  jwt: string | null;
+  id: string | null;
+  role: string | null;
+  email: string | null;
+  name: string | null;
+  surname: string | null;
+  data: null | {
+    functionParish: number | null;
+    createdAnnouncements: null;
+    name: string;
+    parishId: string;
+    parish: {
+      callName: string;
+      address: {
+        region: null;
+        city: string;
+        street: string;
+        buildingNumber: string;
+        postCode: string;
+      };
+      contact: {
+        phoneNumber: string;
+        email: string;
+      };
+      users: null;
+      priests: [null];
+      announcements: null;
+      posts: null;
+      commonWeek: null;
+      specialEvents: null;
+      intentions: null;
+      payments: null;
+      id: string;
+    };
+    photoPath: {
+      path: "";
+      pathMin: "";
+    };
+  };
+}
+
+// interface PriestAttributes {}
+
 const initialState: IInitialState = {
-  token: null,
+  jwt: null,
   id: null,
+  role: null,
   email: null,
   name: null,
   surname: null,
-  role: null,
+  data: null,
 };
 
+export const fetchUserData = createAsyncThunk(
+  "priest/getPriest",
+  async (jwt: string, thunkApi) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Priest`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    const data = await res.json();
+    console.log(data.data);
+    console.log(JSON.stringify(data) + "data");
+    return data;
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    logIn: (state, action) => {
-      state.token = action.payload;
-      if (state.token === null) return;
-      const decoded: IJwtState = jwt(state.token);
-      state.id = decoded.Id;
-      state.email = decoded.Email;
-      state.name = decoded.Name;
-      state.surname = decoded.Surname;
-      state.role = decoded.role;
-    },
     logOut: (state) => {
-      state.token = null;
-      console.log(state.token);
+      state.jwt = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchUserData.pending,
+      (state: IInitialState, action: PayloadAction<any>) => {
+        state.jwt = action.payload;
+        if (state.jwt === null) return;
+        const decoded: IJwtState = jwt(state.jwt);
+        state.id = decoded.Id;
+        state.email = decoded.Email;
+        state.name = decoded.Name;
+        state.surname = decoded.Surname;
+        state.role = decoded.role;
+      }
+    ),
+      builder.addCase(fetchUserData.fulfilled, (state, action) => {});
   },
 });
 

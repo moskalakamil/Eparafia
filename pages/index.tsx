@@ -3,7 +3,6 @@ import Head from "next/head";
 
 import LandingHeader from "components/layout/header/LandingHeader";
 import HeroBackground from "components/global/hero/HeroBackground";
-// import styles from "@/styles/Home.module.css";
 
 export default function Home() {
   return (
