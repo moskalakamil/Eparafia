@@ -5,8 +5,23 @@ import { createOrJoinParish } from "constants/parish";
 import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
+import { useEffect } from "react";
+import { fetchUserData } from "store/auth-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "store/store";
 
 const Parish = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  console.log("asd");
+
+  const isAuthenticated =
+    useSelector((state: any) => state.auth.token) !== null ? true : false;
+
+  useEffect(() => {
+    if (isAuthenticated === null) return;
+    dispatch(fetchUserData());
+    console.log("app running");
+  });
   return (
     <>
       <Head>
