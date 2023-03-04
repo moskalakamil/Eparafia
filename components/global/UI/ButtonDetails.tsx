@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { bigText, normalText, extraBigText } from "../../../style/TextSize";
 
 interface IProps {
   text?: string;

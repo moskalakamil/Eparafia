@@ -83,7 +83,6 @@ export const fetchUserData = createAsyncThunk(
     return data;
   }
 );
-
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
