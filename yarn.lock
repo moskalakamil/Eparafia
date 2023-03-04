@@ -562,7 +562,6 @@
     "@types/react" "*"
 
 "@types/draft-js@*", "@types/draft-js@^0.11.10":
-
   version "0.11.10"
   resolved "https://registry.npmjs.org/@types/draft-js/-/draft-js-0.11.10.tgz"
   integrity sha512-o/DST8x0wNerwhRiaE577UHFIXb6HCywaZOZfj9TF2vU3CONvsCGoQmdOsKqERdXp+3ZNlSvFUH0B8lEEYOT4A==
