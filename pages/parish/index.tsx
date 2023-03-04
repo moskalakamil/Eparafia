@@ -11,17 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store/store";
 
 const Parish = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  console.log("asd");
-
-  const isAuthenticated =
-    useSelector((state: any) => state.auth.token) !== null ? true : false;
-
-  useEffect(() => {
-    if (isAuthenticated === null) return;
-    dispatch(fetchUserData());
-    console.log("app running");
-  });
   return (
     <>
       <Head>
