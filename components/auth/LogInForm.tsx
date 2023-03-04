@@ -17,7 +17,6 @@ import { GetServerSideProps } from "next";
 import { AnyAction, unwrapResult } from "@reduxjs/toolkit";
 import { AppDispatch } from "store/store";
 
-
 interface IProps {
   whoIsLogin: string | string[] | undefined;
 }
