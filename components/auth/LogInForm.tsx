@@ -17,6 +17,7 @@ import { GetServerSideProps } from "next";
 import { AnyAction, unwrapResult } from "@reduxjs/toolkit";
 import { AppDispatch } from "store/store";
 
+
 interface IProps {
   whoIsLogin: string | string[] | undefined;
 }
@@ -38,7 +39,6 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
   };
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    let jwt;
     event.preventDefault();
     try {
       setIsLoading(true);
@@ -59,7 +59,6 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
         }
       );
       const data = await res.json();
-      jwt = data.data.jwt;
       console.log(data);
       if (!res.ok) {
         let errorMessage = data.Errors.Message[0];

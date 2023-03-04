@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import jwt from "jwt-decode";
 import { useSelector } from "react-redux";
@@ -83,7 +84,6 @@ export const fetchUserData = createAsyncThunk(
     return data;
   }
 );
-
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
