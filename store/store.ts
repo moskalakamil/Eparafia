@@ -7,7 +7,7 @@ import {
 import { persistReducer, persistStore } from "redux-persist";
 import thunk, { ThunkAction } from "redux-thunk";
 import storage from "redux-persist/lib/storage";
-import authSlice from "./auth-slice";
+import authSlice, { IAuthState } from "./auth-slice";
 import thunkMiddleware from "redux-thunk";
 import { useDispatch } from "react-redux";
 
@@ -30,5 +30,10 @@ const store = configureStore({
 export default store;
 
 export const persistor = persistStore(store);
+
+export interface IState {
+  auth: IAuthState;
+}
+
 // typeof store.dispatch
 export const useAppDispatch = () => useDispatch<any>();

@@ -71,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //   params: { ParishURL: parish.url },
   // }));
   const paths = [
-    { params: { ParishURL: "a" } },
+    { params: { ParishURL: "Św Apostołów Szymona i Judy Tadeusza" } },
     { params: { ParishURL: "b" } },
     { params: { ParishURL: "c" } },
   ];

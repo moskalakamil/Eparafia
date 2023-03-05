@@ -14,7 +14,7 @@ interface IJwtState {
   nbf: number;
 }
 
-interface IInitialState {
+export interface IAuthState {
   jwt: string | null;
   id: string | null;
   name: string | null;
@@ -70,7 +70,7 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
-const initialState: IInitialState = {
+const initialState: IAuthState = {
   jwt: null,
   id: null,
   name: null,
@@ -94,7 +94,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchUserData.fulfilled,
-      (state: IInitialState, action: PayloadAction<any>) => {
+      (state: IAuthState, action: PayloadAction<any>) => {
         if (action.payload.jwt === null) {
           resetStates(state);
           return;
@@ -122,7 +122,7 @@ export const authAction = authSlice.actions;
 
 export default authSlice.reducer;
 
-const resetStates = (state: IInitialState) => {
+const resetStates = (state: IAuthState) => {
   (state.jwt = null),
     (state.id = null),
     (state.name = null),
