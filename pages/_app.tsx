@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { Provider, useDispatch, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { fetchUserData } from "store/auth-slice";
-import store, { AppDispatch, persistor } from "store/store";
+import store, { persistor } from "store/store";
 // import store, { persistor } from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global-style";

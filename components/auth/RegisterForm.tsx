@@ -11,13 +11,10 @@ import ButtonDetails from "components/global/UI/ButtonDetails";
 import Link from "next/link";
 
 const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
   console.log(props.whoIsLogin);
   const [enteredName, setEnteredName] = useState("");
   const [enteredSurname, setEnteredSurname] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
-  // const [emailErrpr, setEmailErrpr] = useState("");
   const [enteredPhoneNumber, setEnteredPhoneNumber] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");

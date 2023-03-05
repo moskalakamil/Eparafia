@@ -6,19 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "store/auth-slice";
 
 const TheHeader = (props: any) => {
-  const dispatch = useDispatch();
-  const token = useSelector((state: any) => state.auth.token);
+  const { pathname } = useRouter();
+
+  const token = useSelector((state: any) => state.auth.jwt);
+
   const [jwt, setJwt] = useState("");
+
+  const [isLandingHeader, setIsLandingHeader] = useState(true);
 
   useEffect(() => {
     setJwt(token);
   }, [token]);
-
-  console.log("the");
-
-  const { pathname } = useRouter();
-
-  const [isLandingHeader, setIsLandingHeader] = useState(true);
 
   useEffect(() => {
     if (
