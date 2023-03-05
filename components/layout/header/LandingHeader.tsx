@@ -1,28 +1,30 @@
-import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import {
   LandingNavLinkData,
   LandingNavLinkButton,
   LogoData,
-} from 'constants/navbar';
-import Link from 'next/link';
-import AuthAsWhoModal from 'components/auth/AuthWhoModal';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { authAction } from 'store/auth-slice';
+} from "constants/navbar";
+import Link from "next/link";
+import AuthAsWhoModal from "components/auth/AuthWhoModal";
+import React, { useState } from "react";
+import Image from "next/image";
+import { fetchUserData } from "store/auth-slice";
+import { useAppDispatch } from "store/store";
+// import { AppDispatch } from "store/store";
 
 interface IProps {
   isAuthenticated: boolean;
 }
 
 const LandingHeader = ({ isAuthenticated }: IProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const [authCase, setAuthCase] = useState('');
+  const [authCase, setAuthCase] = useState("");
 
   const closeModal = () => {
-    setAuthCase('');
+    setAuthCase("");
   };
 
   const correctLink = (text: string) => {
@@ -30,7 +32,7 @@ const LandingHeader = ({ isAuthenticated }: IProps) => {
   };
 
   const logOutHandler = () => {
-    dispatch(authAction.logOut());
+    dispatch(fetchUserData(null));
   };
   return (
     <HeaderStyle>
@@ -68,7 +70,7 @@ const LandingHeader = ({ isAuthenticated }: IProps) => {
             <p onClick={logOutHandler}>zalogowano</p>
           </>
         )}
-        {authCase !== '' && (
+        {authCase !== "" && (
           <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
         )}
       </div>

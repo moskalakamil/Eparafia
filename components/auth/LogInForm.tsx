@@ -12,17 +12,15 @@ import ButtonDetails from "components/global/UI/ButtonDetails";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { authAction, fetchUserData } from "store/auth-slice";
-import { GetServerSideProps } from "next";
-import { AnyAction, unwrapResult } from "@reduxjs/toolkit";
-import { AppDispatch } from "store/store";
+import { fetchUserData } from "store/auth-slice";
+import { useAppDispatch } from "store/store";
 
 interface IProps {
   whoIsLogin: string | string[] | undefined;
 }
 
 const LogInForm = ({ whoIsLogin }: IProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { push } = useRouter();
 
   const [enteredMail, setEnteredMail] = useState("");
@@ -70,11 +68,10 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
         throw new Error(errorMessage);
       } else {
         dispatch(fetchUserData(data.data.jwt));
-        if (
-          whoIsLogin === AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
-        ) {
+
+        if (whoIsLogin === AuthAsWho.priestNameForBackendEndpoint.toLowerCase())
           push("/parish");
-        } else push("/");
+        else push("/");
       }
     } catch (err: any) {
       // console.log(err);

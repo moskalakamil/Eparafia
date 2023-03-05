@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import jwt from "jwt-decode";
-import { useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 interface IJwtState {
   Id: string;
@@ -18,97 +17,120 @@ interface IJwtState {
 interface IInitialState {
   jwt: string | null;
   id: string | null;
-  role: string | null;
-  email: string | null;
   name: string | null;
   surname: string | null;
-  data: null | {
-    functionParish: number | null;
-    createdAnnouncements: null;
-    name: string;
-    parishId: string;
-    parish: {
-      callName: string;
-      address: {
-        region: null;
-        city: string;
-        street: string;
-        buildingNumber: string;
-        postCode: string;
-      };
-      contact: {
-        phoneNumber: string;
-        email: string;
-      };
-      users: null;
-      priests: [null];
-      announcements: null;
-      posts: null;
-      commonWeek: null;
-      specialEvents: null;
-      intentions: null;
-      payments: null;
-      id: string;
-    };
-    photoPath: {
-      path: "";
-      pathMin: "";
-    };
+  email: string | null;
+  role: string | null;
+  parishId: string | null;
+  parish: {
+    callName: string | null;
+    //     address: {
+    //       region: null;
+    //       city: string;
+    //       street: string;
+    //       buildingNumber: string;
+    //       postCode: string;
+    //     };
+    //     contact: {
+    //       phoneNumber: string;
+    //       email: string;
+    //     };
+    //     users: null;
+    //     priests: [null];
+    //     announcements: null;
+    //     posts: null;
+    //     commonWeek: null;
+    //     specialEvents: null;
+    //     intentions: null;
+    //     payments: null;
+    //   };
+    //   photoPath: {
+    //     path: "";
+    //     pathMin: "";
   };
 }
 
-// interface PriestAttributes {}
+export const fetchUserData = createAsyncThunk(
+  "priest/getPriest",
+  async (jwt: string | null, thunkApi) => {
+    if (jwt === null) return { jwt: null };
+    const decoded_jwt: IJwtState = jwt_decode(jwt);
+    if (decoded_jwt.role === "Priest") {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Priest`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      const data = await res.json();
+      const priestData = data.data;
+      return { jwt, decoded_jwt, data: priestData };
+    } else {
+      return { jwt, decoded_jwt };
+    }
+  }
+);
 
 const initialState: IInitialState = {
   jwt: null,
   id: null,
-  role: null,
-  email: null,
   name: null,
   surname: null,
-  data: null,
+  email: null,
+  role: null,
+  parishId: null,
+  parish: {
+    callName: null,
+  },
 };
 
-export const fetchUserData = createAsyncThunk(
-  "priest/getPriest",
-  async (jwt: string, thunkApi) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Priest`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    });
-    const data = await res.json();
-    console.log(data.data);
-    console.log(JSON.stringify(data) + "data");
-    return data;
-  }
-);
 const authSlice = createSlice({
   name: "auth",
-  initialState: initialState,
+  initialState,
   reducers: {
     logOut: (state) => {
-      state.jwt = null;
+      resetStates(state);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(
-      fetchUserData.pending,
+      fetchUserData.fulfilled,
       (state: IInitialState, action: PayloadAction<any>) => {
-        state.jwt = action.payload;
-        if (state.jwt === null) return;
-        const decoded: IJwtState = jwt(state.jwt);
-        state.id = decoded.Id;
-        state.email = decoded.Email;
-        state.name = decoded.Name;
-        state.surname = decoded.Surname;
-        state.role = decoded.role;
+        if (action.payload.jwt === null) {
+          resetStates(state);
+          return;
+        }
+        state.jwt = action.payload.jwt;
+        state.id = action.payload.decoded_jwt.Id;
+        state.name = action.payload.decoded_jwt.Name;
+        state.surname = action.payload.decoded_jwt.Surname;
+        state.email = action.payload.decoded_jwt.Email;
+        state.role = action.payload.decoded_jwt.role;
+        console.log(action.payload.data);
+        if (action.payload.decoded_jwt.role !== "Priest") return;
+        console.log(action.payload.data);
+
+        state.parishId = action.payload.data.parishId;
+        state.parish.callName = action.payload.data.parish.callName;
+
+        console.log(state);
       }
-    ),
-      builder.addCase(fetchUserData.fulfilled, (state, action) => {});
+    );
   },
 });
 
 export const authAction = authSlice.actions;
 
 export default authSlice.reducer;
+
+const resetStates = (state: IInitialState) => {
+  (state.jwt = null),
+    (state.id = null),
+    (state.name = null),
+    (state.surname = null),
+    (state.email = null),
+    (state.role = null),
+    (state.parishId = null),
+    (state.parish = {
+      callName: null,
+    });
+};

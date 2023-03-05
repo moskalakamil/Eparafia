@@ -5,10 +5,6 @@ import { createOrJoinParish } from "constants/parish";
 import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { fetchUserData } from "store/auth-slice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "store/store";
 
 const Parish = () => {
   return (
