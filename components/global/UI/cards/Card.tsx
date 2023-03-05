@@ -24,8 +24,15 @@ const WrapperCardStyle = styled.div`
   height: 100%;
 `;
 const CardStyle = styled.div`
-  margin-top: 6%;
-  padding: 40px 70px;
+  padding: 160px 70px 40px 70px;
   background-color: #fff;
-  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  @media (min-width: 768px) {
+    padding-top: 40px;
+    margin-top: 6%;
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+  }
 `;

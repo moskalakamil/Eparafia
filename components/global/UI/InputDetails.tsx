@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -9,36 +10,62 @@ interface Props {
 }
 
 const InputDetails = (props: Props) => {
+  const [isFocus, setIsFocus] = useState(false);
   return (
     <>
-      <LabelStyle htmlFor={props.id}>{props.label}</LabelStyle>
-      <InputStyle
-        id={props.id}
-        type={props.typeOfInput || "text"}
-        placeholder={props.placeholder}
-        onInput={props.onInputEntering}
-      />
+      <ContainerStyle>
+        <LabelStyle htmlFor={props.id}>{props.label}</LabelStyle>
+        <InputStyle
+          id={props.id}
+          type={props.typeOfInput || "text"}
+          placeholder={props.placeholder}
+          onInput={props.onInputEntering}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+        />
+        <SpanStyle isFocus={isFocus}></SpanStyle>
+      </ContainerStyle>
     </>
   );
 };
 
 export default InputDetails;
-
+const ContainerStyle = styled.div`
+  position: relative;
+  margin: 20px 0;
+`;
 const LabelStyle = styled.label`
-  margin: 0;
   font-size: 25px;
-  margin: 10px 0;
 `;
 
 const InputStyle = styled.input`
-  background-color: ${(props) => props.theme.colors.inputPrimary};
-  border-radius: 10px;
-  border: none;
-  border-bottom: 1px solid ${(props) => props.theme.colors.inputSecondary} !important;
   outline: none;
-  padding: 15px;
-  margin: 10px 0 25px 0;
-  &:focus {
-    background-color: ${(props) => props.theme.colors.inputFocused};
+  border: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid ${(props) => props.theme.colors.inputPrimary};
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  margin: 20px 0 0 0;
+
+  @media (min-width: 768px) {
+    padding: 15px;
+    background-color: ${(props) => props.theme.colors.inputPrimary};
+    border-radius: 10px;
+    &:focus {
+      background-color: ${(props) => props.theme.colors.inputFocused};
+    }
+  }
+`;
+const SpanStyle = styled.span<{ isFocus: boolean }>`
+  position: absolute;
+  bottom: 0;
+  left: ${(props) => (props.isFocus ? "0" : "50%")};
+  width: ${(props) => (props.isFocus ? "100%" : "0")};
+  height: 1.2px;
+  background-color: #3399ff;
+  transition: 0.4s;
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
