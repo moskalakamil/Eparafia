@@ -5,6 +5,7 @@ import { createOrJoinParish } from "constants/parish";
 import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Parish = () => {
   return (

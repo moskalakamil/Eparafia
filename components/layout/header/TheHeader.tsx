@@ -4,8 +4,10 @@ import LandingHeader from "./LandingHeader";
 import ParishHeader from "./ParishHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "store/auth-slice";
-
+import { useTranslation } from "next-i18next";
 const TheHeader = (props: any) => {
+  const { t } = useTranslation("common");
+
   const { pathname } = useRouter();
 
   const token = useSelector((state: any) => state.auth.jwt);

@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { fetchUserData } from "store/auth-slice";
 import { useAppDispatch } from "store/store";
-// import { AppDispatch } from "store/store";
+import { useTranslation } from "next-i18next";
 
 interface IProps {
   isAuthenticated: boolean;
@@ -21,24 +21,21 @@ interface IProps {
 const LandingHeader = ({ isAuthenticated }: IProps) => {
   const dispatch = useAppDispatch();
 
-  const [authCase, setAuthCase] = useState("");
+  const { t } = useTranslation("common");
+  const [authAction, setAuthAction] = useState("");
 
   const closeModal = () => {
-    setAuthCase("");
+    setAuthAction("");
   };
-
-  const correctLink = (text: string) => {
-    setAuthCase(text);
-  };
-
   const logOutHandler = () => {
     dispatch(fetchUserData(null));
   };
+
   return (
     <HeaderStyle>
       <Link href="/">
         <Image
-          src={LogoData.source}
+          src="/images/global/logo.png"
           alt="logo"
           fill
           sizes="(max-width: 768px) 100vw,
@@ -48,30 +45,30 @@ const LandingHeader = ({ isAuthenticated }: IProps) => {
       </Link>
       <div>
         <ul>
-          {LandingNavLinkData.map((data) => (
-            <li key={data.id}>{data.text}</li>
-          ))}
+          <li>{t("nav-landing -> I am priest")}</li>
+          <li>{t("nav-landing -> I am priest")}</li>
+          <li>{t("nav-landing -> I am priest")}</li>
         </ul>
-        {!isAuthenticated && (
+        {!isAuthenticated ? (
           <>
-            {LandingNavLinkButton.map((data) => (
-              <ButtonStyle
-                onClick={() => correctLink(data.text)}
-                key={data.id}
-                color={data.color}
-              >
-                {data.text}
-              </ButtonStyle>
-            ))}
+            <ButtonStyle
+              onClick={() => setAuthAction("login")}
+              color="transparent"
+            >
+              {t("nav-landing -> signin")}
+            </ButtonStyle>
+            <ButtonStyle
+              onClick={() => setAuthAction("register")}
+              color="#282828e5"
+            >
+              {t("nav-landing -> signup")}
+            </ButtonStyle>
           </>
+        ) : (
+          <p onClick={logOutHandler}>zalogowano</p>
         )}
-        {isAuthenticated && (
-          <>
-            <p onClick={logOutHandler}>zalogowano</p>
-          </>
-        )}
-        {authCase !== "" && (
-          <AuthAsWhoModal authCase={authCase} onCloseModal={closeModal} />
+        {authAction !== "" && (
+          <AuthAsWhoModal authAction={authAction} closeModal={closeModal} />
         )}
       </div>
     </HeaderStyle>

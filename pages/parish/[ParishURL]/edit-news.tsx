@@ -1,8 +1,6 @@
-import ParishHeader from "components/layout/header/ParishHeader";
 import NewsEditForm from "components/parish/news/editNews";
 import NewsEditHeader from "components/parish/news/editNews/NewsEditHeading";
-
-import styled from "styled-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ParishNewsEdit = () => {
   return (

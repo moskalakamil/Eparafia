@@ -1,28 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import React from "react";
-import { authAction } from "store/auth-slice";
+import React, { useState } from "react";
+import { fetchUserData } from "store/auth-slice";
 
 import styled from "styled-components";
 import { LogoData, ParishNavLinksData } from "../../../constants/navbar";
+import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "store/store";
+import AuthAsWhoModal from "components/auth/AuthWhoModal";
 
 interface IProps {
   isAuthenticated: boolean;
 }
 
 const ParishHeader = ({ isAuthenticated }: IProps) => {
-  const dispatch = useDispatch();
-
-  const logOut = () => {
-    dispatch(authAction.logOut());
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation("common");
+  const [authAction, setAuthAction] = useState("");
+  const closeModal = () => {
+    setAuthAction("");
+  };
+  const logOutHandler = () => {
+    dispatch(fetchUserData(null));
   };
 
   return (
     <HeaderStyle>
       <Link href="/">
         <Image
-          src={LogoData.source}
+          src="/images/global/logo.png"
           alt="logo"
           fill
           sizes="(max-width: 768px) 100vw,
@@ -32,14 +39,30 @@ const ParishHeader = ({ isAuthenticated }: IProps) => {
       </Link>
       <div>
         <ul>
-          {ParishNavLinksData.map((data) => (
-            <li key={data.id}>{data.text}</li>
-          ))}
+          <li>{t("nav-parish -> news")}</li>
+          <li>{t("nav-parish -> news")}</li>
+          <li>{t("nav-parish -> news")}</li>
         </ul>
-        {isAuthenticated && (
+        {!isAuthenticated ? (
           <>
-            <p onClick={logOut}>zalogowano</p>
+            <ButtonStyle
+              onClick={() => setAuthAction("login")}
+              color="transparent"
+            >
+              {t("nav-landing -> signin")}
+            </ButtonStyle>
+            <ButtonStyle
+              onClick={() => setAuthAction("register")}
+              color="#282828e5"
+            >
+              {t("nav-landing -> signup")}
+            </ButtonStyle>
           </>
+        ) : (
+          <p onClick={logOutHandler}>zalogowano</p>
+        )}
+        {authAction !== "" && (
+          <AuthAsWhoModal authAction={authAction} closeModal={closeModal} />
         )}
       </div>
     </HeaderStyle>
@@ -82,4 +105,15 @@ const HeaderStyle = styled.header`
       }
     }
   }
+`;
+const ButtonStyle = styled.button`
+  padding: 15px;
+  margin: 0 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  background-color: ${(props) => props.color};
 `;

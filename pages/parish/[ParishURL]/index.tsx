@@ -2,7 +2,7 @@ import News from "components/parish/news";
 import ParishHero from "components/parish/parishHero";
 import MenuCards from "components/parish/parishMenu";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useSelector } from "react-redux";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Parish = (props: any) => {
   return (
@@ -55,11 +55,11 @@ export const loadParishes = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (contex) => {
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => {
   const parishes = await loadParishes();
 
   return {
-    props: parishes,
+    props: { parishes, ...(await serverSideTranslations(locale, ["common"])) },
   };
 };
 
