@@ -2,10 +2,11 @@ import BtnEditGoBack from "components/global/UI/BtnEditGoBack";
 import TextDetails from "components/global/UI/TextDetails";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import { ParishEditingNews } from "../../../../constants/parish";
 
 const NewsEditHeader = () => {
+  const { t } = useTranslation();
   const { query } = useRouter();
   console.log(query.ParishName);
 
@@ -34,14 +35,17 @@ const NewsEditHeader = () => {
         parishName={query.ParishName}
       />
       <TextDetails
-        text={ParishEditingNews.heading}
+        text={t("edit-news-header -> edit news")}
         size="large"
         weight="large"
         align="center"
       />
       {windowWidth > 1220 && (
         <div>
-          <TextDetails text={ParishEditingNews.dateText} size="small" />
+          <TextDetails
+            text={t("edit-news-date-text -> date when news was added")}
+            size="small"
+          />
           <TextDetails text={"23.10.2022"} size="small" />
         </div>
       )}

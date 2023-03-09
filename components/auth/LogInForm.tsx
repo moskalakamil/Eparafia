@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Spinner from "components/global/loading/Spinner";
-// import { useDispatch } from "react-redux";
-
-import { AuthAsWho, LoginData } from "../../constants/auth";
-import AuthBackground from "../global/UI/Background";
-import TextDetails from "components/global/UI/TextDetails";
-import InputDetails from "components/global/UI/InputDetails";
-import ButtonDetails from "components/global/UI/ButtonDetails";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import styled from "styled-components";
+
 import { fetchUserData } from "store/auth-slice";
 import { useAppDispatch } from "store/store";
+
+import Spinner from "components/global/loading/Spinner";
+import ButtonDetails from "components/global/UI/ButtonDetails";
+import AuthBackground from "components/global/UI/Background";
+import TextDetails from "components/global/UI/TextDetails";
+import InputDetails from "components/global/UI/InputDetails";
 
 interface IProps {
   whoIsLogin: string | string[] | undefined;
 }
 
 const LogInForm = ({ whoIsLogin }: IProps) => {
+  const { t } = useTranslation("auth");
+
   const dispatch = useAppDispatch();
   const { push } = useRouter();
 
@@ -37,12 +37,15 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const whoBackendEndpoint = whoIsLogin === "parishioner" ? "User" : "Priest";
+
     try {
       setIsLoading(true);
       setError("");
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${whoIsLogin}/login`,
+        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${whoBackendEndpoint}/login`,
 
         {
           method: "POST",
@@ -67,10 +70,10 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
 
         throw new Error(errorMessage);
       } else {
+        console.log(data.data.jwt);
         dispatch(fetchUserData(data.data.jwt));
 
-        if (whoIsLogin === AuthAsWho.priestNameForBackendEndpoint.toLowerCase())
-          push("/parish");
+        if (whoIsLogin === "priest") push("/parish");
         else push("/");
       }
     } catch (err: any) {
@@ -87,50 +90,47 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
         <>
           <TextDetails
             text={
-              LoginData[0].text +
-              " " +
-              (whoIsLogin ===
-              AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
-                ? AuthAsWho.authAsPriest
-                : AuthAsWho.authAsUser)
+              whoIsLogin === "priest"
+                ? t("login-header -> login as priest")
+                : t("login-header -> login as parishioner")
             }
             size="large"
           />
           <FormStyle onSubmit={submitHandler}>
             <InputDetails
-              label={LoginData[1].text}
-              placeholder={LoginData[1].placeholder || ""}
-              id="1"
+              label={t("auth-label -> email adress")}
+              placeholder={t("auth-placeholder -> enter your email")}
+              id="email"
               typeOfInput="email"
               onInputEntering={emailInput}
             />
             <InputDetails
-              label={LoginData[2].text}
-              placeholder={LoginData[2].placeholder || ""}
-              id="2"
+              label={t("auth-label -> password")}
+              placeholder={t("auth-placeholder -> enter your password")}
+              id="password"
               typeOfInput="password"
               onInputEntering={passwordInput}
             />
-            <p>{LoginData[3].text}</p>
+            <p>{t("auth -> dont remember password")}</p>
             <ButtonDetails
-              text={LoginData[4].text}
+              text={t("register-btn -> register")}
               color="secondary"
               typeOfBtn="submit"
             ></ButtonDetails>
           </FormStyle>
           <p>
-            {LoginData[5].text}
+            {t("auth -> dont have account?") + " "}
             <Link
               href={
-                whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
+                whoIsLogin === "priest"
                   ? "/register?who=priest"
                   : "/register?who=user"
               }
             >
-              {LoginData[5].span}
+              {t("dont have account span -> register")}
             </Link>
           </p>
-          {error.length !== 0 && <ErrorStyle>{error}</ErrorStyle>}
+          {error.length !== 0 && <PErrorStyle>{error}</PErrorStyle>}
         </>
       )}
     </AuthBackground>
@@ -143,6 +143,6 @@ const FormStyle = styled.form`
   display: flex;
   flex-direction: column;
 `;
-const ErrorStyle = styled.p`
+const PErrorStyle = styled.p`
   color: red;
 `;

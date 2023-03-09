@@ -2,10 +2,11 @@ import BtnEditGoBack from "components/global/UI/BtnEditGoBack";
 import TextDetails from "components/global/UI/TextDetails";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import { ParishEditingAnnouncements } from "../../../../constants/parish";
 
 const AnnouncementEditHeader = () => {
+  const { t } = useTranslation();
   const { query } = useRouter();
 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -27,7 +28,7 @@ const AnnouncementEditHeader = () => {
         parishName={query.ParishName}
       />
       <TextDetails
-        text={ParishEditingAnnouncements.heading}
+        text={t("edit-announcement-header -> edit announcement")}
         size="large"
         weight="large"
         align="center"
@@ -35,7 +36,9 @@ const AnnouncementEditHeader = () => {
       {windowWidth > 1300 && (
         <div>
           <TextDetails
-            text={ParishEditingAnnouncements.dateText}
+            text={t(
+              "edit-announcement-date-text -> date when announcement was added"
+            )}
             size="small"
           />
           <TextDetails text={"23.10.2022"} size="small" />

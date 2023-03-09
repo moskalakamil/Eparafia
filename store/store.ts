@@ -6,14 +6,14 @@ import {
 } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk, { ThunkAction } from "redux-thunk";
-import storage from "redux-persist/lib/storage";
+import storageSession from "reduxjs-toolkit-persist/lib/storage/session";
 import authSlice from "./auth-slice";
 import thunkMiddleware from "redux-thunk";
 import { useDispatch } from "react-redux";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: storageSession,
 };
 
 const rootReducer = combineReducers({

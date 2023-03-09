@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { useTranslation } from "next-i18next";
 
 import styled from "styled-components";
-import { ParishEditingNews } from "../../../constants/parish";
 // import { bigText, normalText } from "../../../style/TextSize";
 import TextDetails from "./TextDetails";
 
@@ -19,6 +19,7 @@ const BtnEditGoBack = ({
   minWidthTextVisible,
   parishName,
 }: IProps) => {
+  const { t } = useTranslation("parish");
   return (
     <Link href={`/parish/${parishName}`} style={{ textDecoration: "none" }}>
       <ContainerStyle minWidth={minWidthTextVisible + "px"}>
@@ -33,7 +34,7 @@ const BtnEditGoBack = ({
         </div>
         {windowWidth > minWidthTextVisible && (
           <TextDetails
-            text={ParishEditingNews.goBack}
+            text={t("edit -> go back")}
             size="medium"
             weight="large"
           />
