@@ -1,9 +1,8 @@
-import Spinner from "components/global/loading/Spinner";
-import InputDetails from "components/global/UI/InputDetails";
-import { createParishForm } from "constants/parish";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
+import InputDetails from "components/global/UI/InputDetails";
+import ButtonDetails from "components/global/UI/ButtonDetails";
 interface ISubmitProps {
   callName: string;
   region: string;
@@ -28,6 +27,8 @@ interface IProps {
 }
 
 const CreateFirstStep = (props: IProps) => {
+  const { t } = useTranslation("parish");
+
   const [callName, setCallName] = useState("");
   const [region, setRegion] = useState("");
   const [city, setCity] = useState("");
@@ -81,54 +82,60 @@ const CreateFirstStep = (props: IProps) => {
     <>
       <FormStyle onSubmit={submit}>
         <InputDetails
-          label={createParishForm[0].text}
-          placeholder={createParishForm[0].placeholder}
+          label={t("create-parish-label -> call name")}
+          placeholder={t("create-parish-placeholder -> enter call name")}
           id="0"
           onInputEntering={parishCallNameInput}
         />
         <InputDetails
-          label={createParishForm[1].text}
-          placeholder={createParishForm[1].placeholder}
+          label={t("create-parish-label -> region")}
+          placeholder={t("create-parish-placeholder -> enter region")}
           id="1"
           onInputEntering={parishRegionInput}
         />
         <InputDetails
-          label={createParishForm[2].text}
-          placeholder={createParishForm[2].placeholder}
+          label={t("create-parish-label -> city")}
+          placeholder={t("create-parish-placeholder -> enter city")}
           id="2"
           onInputEntering={parishCityInput}
         />
         <InputDetails
-          label={createParishForm[3].text}
-          placeholder={createParishForm[3].placeholder}
+          label={t("create-parish-label -> street")}
+          placeholder={t("create-parish-placeholder -> enter street")}
           id="3"
           onInputEntering={parishStreetInput}
         />
         <InputDetails
-          label={createParishForm[4].text}
-          placeholder={createParishForm[4].placeholder}
+          label={t("create-parish-label -> building number")}
+          placeholder={t("create-parish-placeholder -> enter building number")}
           id="4"
           onInputEntering={parishBuildingNumberInput}
         />
         <InputDetails
-          label={createParishForm[5].text}
-          placeholder={createParishForm[5].placeholder}
+          label={t("create-parish-label -> post code")}
+          placeholder={t("create-parish-placeholder -> enter post code")}
           id="5"
           onInputEntering={parishPostCodeInput}
         />
         <InputDetails
-          label={createParishForm[6].text}
-          placeholder={createParishForm[6].placeholder}
+          label={t("create-parish-label -> parish phone number")}
+          placeholder={t(
+            "create-parish-placeholder -> enter parish phone number"
+          )}
           id="6"
           onInputEntering={parishPhoneNumberInput}
         />
         <InputDetails
-          label={createParishForm[7].text}
-          placeholder={createParishForm[7].placeholder}
+          label={t("create-parish-label -> parish email")}
+          placeholder={t("create-parish-placeholder -> enter parish email")}
           id="7"
           onInputEntering={parishMailInput}
         />
-        <button type="submit">wyslij</button>
+        <ButtonDetails
+          typeOfBtn="submit"
+          text={t("create-parish-submit-btn -> send")}
+          color="secondary"
+        />
       </FormStyle>
     </>
   );

@@ -1,29 +1,38 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import TextDetails from "components/global/UI/TextDetails";
 import React from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import { menuParish } from "../../../constants/parish";
+import ParishMenuCard from "./ParishMenuCard";
+
+interface itemProps {
+  header: string;
+  items: {};
+}
 
 const MenuCards = () => {
+  const { t } = useTranslation("parish");
   return (
     <ContainerStyle>
-      {menuParish.map((data) => (
-        <MenuCardStyle key={data.id}>
-          <TextDetails
-            text={data.name}
-            size="medium"
-            weight="large"
-            margin="0 0 50px 0"
-            underline={true}
-          />
-          <ul>
-            {data.menuList.map((dataList) => (
-              <li key={dataList.id}>{dataList.text}</li>
-            ))}
-          </ul>
-          <ButtonDetails text={data.button} color="secondary" />
-        </MenuCardStyle>
-      ))}
+      <ParishMenuCard
+        header={t("parish-menu-header -> menage parish")}
+        list={[
+          t("parish-menu-listitem -> add to baptism book"),
+          t("parish-menu-listitem -> edit wedding book"),
+          t("parish-menu-listitem -> menage calender"),
+          t("parish-menu-listitem -> add priests"),
+          t("parish-menu-listitem -> change parish website settings"),
+        ]}
+      />
+      <ParishMenuCard
+        header={t("parish-menu-header -> menage liturgical service")}
+        list={[
+          t("parish-menu-listitem -> points count"),
+          t("parish-menu-listitem -> choirboy duty"),
+          t("parish-menu-listitem -> carol"),
+          t("parish-menu-listitem -> menage liturgical assistance"),
+        ]}
+      />
     </ContainerStyle>
   );
 };

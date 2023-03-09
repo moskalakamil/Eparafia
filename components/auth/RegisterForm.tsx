@@ -1,17 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { AuthAsWho, SignUpData } from "../../constants/auth";
-
 import AuthBackground from "../global/UI/Background";
 import Spinner from "components/global/loading/Spinner";
 import TextDetails from "components/global/UI/TextDetails";
 import InputDetails from "components/global/UI/InputDetails";
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
-  console.log(props.whoIsLogin);
+  const { t } = useTranslation("auth");
+
   const [enteredName, setEnteredName] = useState("");
   const [enteredSurname, setEnteredSurname] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -53,12 +53,15 @@ const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const whoBackendEndpoint =
+      props.whoIsLogin === "parishioner" ? "User" : "Priest";
+
     try {
       setIsLoading(true);
       setError("");
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${props.whoIsLogin}`,
+        `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${whoBackendEndpoint}`,
         {
           method: "POST",
           headers: {
@@ -103,73 +106,66 @@ const RegisterForm = (props: { whoIsLogin: string | string[] | undefined }) => {
         <>
           <TextDetails
             text={
-              SignUpData[0].text +
-              " " +
-              (props.whoIsLogin ===
-              AuthAsWho.priestNameForBackendEndpoint.toLowerCase()
-                ? AuthAsWho.authAsPriest
-                : AuthAsWho.authAsUser)
+              props.whoIsLogin === "priest"
+                ? t("register-header -> register as priest")
+                : t("register-header -> register as parishioner")
             }
             size="large"
           />
           <FormStyle onSubmit={submitHandler}>
             <InputDetails
-              label={SignUpData[1].text}
-              placeholder={SignUpData[1].placeholder || ""}
-              id="1"
+              label={t("auth-label -> name")}
+              placeholder={t("auth-placeholder -> enter your name")}
+              id="name"
               onInputEntering={nameInputHandler}
             />
             <InputDetails
-              label={SignUpData[2].text}
-              placeholder={SignUpData[2].placeholder || ""}
-              id="2"
+              label={t("auth-label -> surname")}
+              placeholder={t("auth-placeholder -> enter your surname")}
+              id="surname"
               onInputEntering={surnameInputHandler}
             />
             <InputDetails
-              label={SignUpData[3].text}
-              placeholder={SignUpData[3].placeholder || ""}
-              id="3"
+              label={t("auth-label -> email adress")}
+              placeholder={t("auth-placeholder -> enter your email")}
+              id="mail"
               typeOfInput="email"
               onInputEntering={emailInputHandler}
             />
             <InputDetails
-              label={SignUpData[4].text}
-              placeholder={SignUpData[4].placeholder || ""}
-              id="4"
+              label={t("auth-label -> phone number")}
+              placeholder={t("auth-placeholder -> enter your phone number")}
+              id="phone"
               typeOfInput="tel"
               onInputEntering={phoneNumberInputHandler}
             />
             <InputDetails
-              label={SignUpData[5].text}
-              placeholder={SignUpData[5].placeholder || ""}
-              id="5"
+              label={t("auth-label -> password")}
+              placeholder={t("auth-placeholder -> enter your password")}
+              id="password"
               typeOfInput="password"
               onInputEntering={passwordInputHandler}
             />
 
             <InputDetails
-              label={SignUpData[6].text}
-              placeholder={SignUpData[6].placeholder || ""}
-              id="6"
+              label={t("auth-label -> confirm password")}
+              placeholder={t("auth-placeholder -> confirm password")}
+              id="confirmpassword"
               typeOfInput="password"
               onInputEntering={confirmPasswordInputHandler}
             />
             <ButtonDetails
-              text={SignUpData[7].text}
+              text={t("register-btn -> register")}
               color="secondary"
               typeOfBtn="submit"
             ></ButtonDetails>
           </FormStyle>
           <p>
-            {SignUpData[8].text}
+            {t("auth -> have account?") + " "}
             <Link
-              href={
-                props.whoIsLogin === AuthAsWho.priestNameForBackendEndpoint
-                  ? "/login-priest"
-                  : "/login"
-              }
+              href={props.whoIsLogin === "priest" ? "/login-priest" : "/login"}
             >
-              {SignUpData[8].span}
+              {t("have account span -> login")}
             </Link>
           </p>
           {error.length !== 0 && <ErrorStyle>{error}</ErrorStyle>}

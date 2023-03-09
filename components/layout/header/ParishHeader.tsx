@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { fetchUserData } from "store/auth-slice";
 
 import styled from "styled-components";
-import { LogoData, ParishNavLinksData } from "../../../constants/navbar";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "store/store";
 import AuthAsWhoModal from "components/auth/AuthWhoModal";
@@ -49,13 +48,13 @@ const ParishHeader = ({ isAuthenticated }: IProps) => {
               onClick={() => setAuthAction("login")}
               color="transparent"
             >
-              {t("nav-landing -> signin")}
+              {t("header -> signin")}
             </ButtonStyle>
             <ButtonStyle
               onClick={() => setAuthAction("register")}
               color="#282828e5"
             >
-              {t("nav-landing -> signup")}
+              {t("header -> signup")}
             </ButtonStyle>
           </>
         ) : (

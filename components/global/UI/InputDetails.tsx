@@ -45,11 +45,12 @@ const InputStyle = styled.input`
   border-bottom: 1px solid ${(props) => props.theme.colors.inputPrimary};
   width: 100%;
   box-sizing: border-box;
-  letter-spacing: 1px;
   margin: 20px 0 0 0;
+  letter-spacing: 1px;
 
   @media (min-width: 768px) {
     padding: 15px;
+    letter-spacing: none;
     background-color: ${(props) => props.theme.colors.inputPrimary};
     border-radius: 10px;
     &:focus {

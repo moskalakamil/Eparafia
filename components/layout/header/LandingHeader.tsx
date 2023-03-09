@@ -1,11 +1,4 @@
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-
-import {
-  LandingNavLinkData,
-  LandingNavLinkButton,
-  LogoData,
-} from "constants/navbar";
 import Link from "next/link";
 import AuthAsWhoModal from "components/auth/AuthWhoModal";
 import React, { useState } from "react";
@@ -55,13 +48,13 @@ const LandingHeader = ({ isAuthenticated }: IProps) => {
               onClick={() => setAuthAction("login")}
               color="transparent"
             >
-              {t("nav-landing -> signin")}
+              {t("header -> signin")}
             </ButtonStyle>
             <ButtonStyle
               onClick={() => setAuthAction("register")}
               color="#282828e5"
             >
-              {t("nav-landing -> signup")}
+              {t("header -> signup")}
             </ButtonStyle>
           </>
         ) : (

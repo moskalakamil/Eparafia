@@ -1,38 +1,36 @@
-import styled from 'styled-components';
-import Modal from 'components/global/UI/cards/Modal';
-// import { smallText } from "../../style/TextSize";
-// import { secondary } from "../../style/Colors";
-import Link from 'next/link';
-import { AuthAsWho } from 'constants/auth';
+import styled from "styled-components";
+import Modal from "components/global/UI/cards/Modal";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const AuthAsWhoModal = (props: {
-  authCase: string;
-  onCloseModal: () => void;
+  authAction: string;
+  closeModal: () => void;
 }) => {
+  const { t } = useTranslation("common");
   return (
     <Modal>
       <>
         <ButtonStyle>
           <Link
-            href={`${
-              props.authCase === 'Zaloguj' ? '/login' : '/register'
-            }?who=user`}
-            onClick={props.onCloseModal}
-            // state={AuthAsWho.userNameForBackendEndpoint}
+            onClick={props.closeModal}
+            href={"/" + props.authAction + "?who=parishioner"}
           >
-            {props.authCase + ' ' + AuthAsWho.authAsUser}
+            {props.authAction === "register"
+              ? t("nav-modal -> signup as parishioner")
+              : t("nav-modal -> signin as parishioner")}
           </Link>
         </ButtonStyle>
         {/* login/register as user */}
+
         <ButtonStyle isColor={true}>
           <Link
-            href={`${
-              props.authCase === 'Zaloguj' ? '/login' : '/register'
-            }?who=priest`}
-            onClick={props.onCloseModal}
-            // state={AuthAsWho.priestNameForBackendEndpoint}
+            onClick={props.closeModal}
+            href={"/" + props.authAction + "?who=priest"}
           >
-            {props.authCase + ' ' + AuthAsWho.authAsPriest}
+            {props.authAction === "login"
+              ? t("nav-modal -> signin as priest")
+              : t("nav-modal -> signup as priest")}
           </Link>
         </ButtonStyle>
         {/* login/register as priest */}
@@ -48,7 +46,7 @@ const ButtonStyle = styled.button<{ isColor?: boolean }>`
   height: 20vh;
   margin: 3%;
   background-color: ${(props) =>
-    props.isColor ? (props) => props.theme.colors.secondary : 'white'};
+    props.isColor ? (props) => props.theme.colors.secondary : "white"};
   border-radius: 20px;
   border-color: black;
   font-size: ${(props) => props.theme.fontSizes.small};

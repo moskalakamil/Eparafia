@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  text?: string;
+  text: string;
   color?: string;
   padding?: string;
   width?: string;
