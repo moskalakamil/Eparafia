@@ -3,7 +3,7 @@ import TextDetails from "components/global/UI/TextDetails";
 import React from "react";
 import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import ParishMenuCard from "./ParishMenuCard";
+import ParishMenuCard from "components/parish/parishMenu/ParishMenuCard";
 
 interface itemProps {
   header: string;
