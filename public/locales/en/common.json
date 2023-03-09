@@ -1,8 +1,8 @@
 {
   "nav-landing -> I am priest": "I am priest",
-  "nav-landing -> signin": "sign in",
-  "nav-landing -> signup": "sign up",
   "nav-parish -> news": "news",
+  "header -> signin": "sign in",
+  "header -> signup": "sign up",
   "nav-modal -> signin as parishioner": "sign in as parishioner",
   "nav-modal -> signin as priest": "sign in as priest",
   "nav-modal -> signup as parishioner": "sign up as parishioner",
