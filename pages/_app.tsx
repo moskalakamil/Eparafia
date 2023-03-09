@@ -14,12 +14,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {() => (
-            <Layout>
-              <Component {...pageProps} />
-              <GlobalStyle />
-            </Layout>
-          )}
+          {/* {() => ( */}
+          <Layout>
+            <Component {...pageProps} />
+            <GlobalStyle />
+          </Layout>
+          {/* )} */}
         </PersistGate>
       </Provider>
     </ThemeProvider>
