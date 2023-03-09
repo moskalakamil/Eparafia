@@ -56,6 +56,7 @@
   "edit-news-date-text -> date when news was added": "Date when news was added: ",
   "edit-news-title -> title": "Tittle:",
   "edit-news-describe -> describe": "Describe:",
+  "edit-news-image -> image": "Zdjęcie:",
   "edit-news-change-image -> change image": "Click for change image",
 
   "edit-announcement-header -> edit announcement": "Edit parish announcement",

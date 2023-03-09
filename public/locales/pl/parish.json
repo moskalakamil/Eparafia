@@ -56,6 +56,7 @@
   "edit-news-date-text -> date when news was added": "Data kiedy aktualność została dodana: ",
   "edit-news-title -> title": "Tytuł:",
   "edit-news-describe -> describe": "Opis:",
+  "edit-news-image -> image": "Zdjęcie:",
   "edit-news-change-image -> change image": "Kliknij aby zmienić zdjęcie",
 
   "edit-announcement-header -> edit announcement": "Edytuj ogłoszenie parafialne",
