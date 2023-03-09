@@ -1,16 +1,15 @@
-import LandingHeader from "components/layout/header/LandingHeader";
-import TextDetails from "components/global/UI/TextDetails";
-import CreateFirstStep from "components/parish/createParish/CreateFirstStep";
-import CreateParishPagination from "components/parish/createParish/CreateParishPagination";
-import { createParish } from "constants/parish";
-import { useState } from "react";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import Spinner from "components/global/loading/Spinner";
 import CreateParish from "components/parish/createParish";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const CreateParishPage = () => {
   return <CreateParish />;
 };
 
 export default CreateParishPage;
+
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common", "parish"])),
+  },
+});

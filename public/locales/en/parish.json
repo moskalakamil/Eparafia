@@ -1,0 +1,66 @@
+{
+  "join-parish-header -> welcome in eparafia": "Welcome to the eparafia!",
+  "join-parish-description": "Jeśli chcesz założyć swoją eparafię, kliknij przycisk. Natomiast jeśli parafia jest już założona, zaczekaj na dodanie Cię do niej. Osoba, która ją stworzyła, może to uczynić poprzez wejście w opcję zarządzaj parafią",
+  "join-parish-button -> create parish": "Create your own e-parish!",
+
+  "create-parish-header -> welcome in eparafia": "Welcome to the eparafia!",
+  "create-parish-second-header -> create parish": "Create your own e-parish!",
+
+  "create-parish-label -> call name": "Parish dedicated:",
+  "create-parish-placeholder -> enter call name": "Enter parish dedicated...",
+  "create-parish-label -> region": "Region:",
+  "create-parish-placeholder -> enter region": "Enter parish region...",
+  "create-parish-label -> city": "City:",
+  "create-parish-placeholder -> enter city": "Enter parish city...",
+  "create-parish-label -> street": "Street:",
+  "create-parish-placeholder -> enter street": "Enter parish street...",
+  "create-parish-label -> building number": "Building number:",
+  "create-parish-placeholder -> enter building number": "Enter building number...",
+  "create-parish-label -> post code": "Post code:",
+  "create-parish-placeholder -> enter post code": "Enter post code...",
+  "create-parish-label -> parish phone number": "Parish's phone number:",
+  "create-parish-placeholder -> enter parish phone number": "Enter parish phone number...",
+  "create-parish-label -> parish email": "Parish email:",
+  "create-parish-placeholder -> enter parish email": "Enter parish email...",
+
+  "create-parish-submit-btn -> send": "send",
+
+  "parish-hero -> chasuble color": "chasuable color:",
+
+  "parish-menu-header -> menage parish": "Zarządzaj parafią",
+  "parish-menu-listitem -> add to baptism book": "Dodaj do księgi chrztu",
+  "parish-menu-listitem -> edit wedding book": "Edytuj Księge Ślubu",
+  "parish-menu-listitem -> menage calender": "Zarządzaj kalendarzem",
+  "parish-menu-listitem -> add priests": "Dodaj nowych księży",
+  "parish-menu-listitem -> change parish website settings": "Zmień ustawienia strony parafialnej",
+
+  "parish-menu-header -> menage liturgical service": "Zarządzaj służbą liturgiczną",
+  "parish-menu-listitem -> points count": "Liczenie punktów",
+  "parish-menu-listitem -> choirboy duty": "Ustal dyżury ministrantów",
+  "parish-menu-listitem -> carol": "Ustal kolędę dla ministrantów",
+  "parish-menu-listitem -> menage liturgical assistance": "Zarządzaj asystą",
+
+  "parish-menu-button -> menage": "Menage",
+
+  "parish-news-heading -> last news": "Last News",
+  "parish-news -> add news": "Add News",
+  "parish-news -> read more": "read more",
+  "parish-news -> edit news": "Edit",
+
+  "parish-announcement-heading -> parish announcement": "Parish Announcement",
+  "parish-announcement -> add parish announcement": "Add parish announcement",
+  "parish-announcement -> read more": "read more",
+  "parish-announcement -> edit news": "edit announcement",
+
+  "edit-news-header -> edit news": "edit news",
+  "edit-news-date-text -> date when news was added": "Date when news was added: ",
+  "edit-news-title -> title": "Tittle:",
+  "edit-news-describe -> describe": "Describe:",
+  "edit-news-image -> image": "Zdjęcie:",
+  "edit-news-change-image -> change image": "Click for change image",
+
+  "edit-announcement-header -> edit announcement": "Edit parish announcement",
+  "edit-announcement-date-text -> date when announcement was added": "Date when announcement was added: ",
+
+  "edit -> go back": "go back"
+}

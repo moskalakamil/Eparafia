@@ -1,19 +1,20 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import TextDetails from "components/global/UI/TextDetails";
 import React from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import { ParishNewsData } from "../../../constants/parish";
 
 const NewsHeading = () => {
+  const { t } = useTranslation();
   return (
     <ContainerStyle>
       <TextDetails
-        text={ParishNewsData.heading}
+        text={t("parish-news-heading -> last news")}
         size="xlarge"
         weight="xlarge"
       />
       <ButtonDetails
-        text={ParishNewsData.add}
+        text={t("parish-news -> add news")}
         color="white"
         width={"auto"}
         padding="10px 50px"

@@ -1,23 +1,24 @@
 import RegisterForm from "components/auth/RegisterForm";
 import LandingHeader from "components/layout/header/LandingHeader";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Register = () => {
   const { query, push } = useRouter();
 
-  const [whoIsLoggedIn, setWhoIsLoggedIn] = useState(query.who);
-  console.log(whoIsLoggedIn);
-  useEffect(() => {
-    setWhoIsLoggedIn(query.who);
-    if (!whoIsLoggedIn) push("/register?who=user");
-  }, [query, whoIsLoggedIn, push]);
-
   return (
     <>
-      <RegisterForm whoIsLogin={whoIsLoggedIn} />
+      <RegisterForm whoIsLogin={query.who || "user"} />
     </>
   );
 };
 
 export default Register;
+
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common", "auth"])),
+  },
+});

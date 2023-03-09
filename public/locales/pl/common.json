@@ -1,0 +1,10 @@
+{
+  "nav-landing -> I am priest": "Jestem księdzem",
+  "nav-parish -> news": "aktualności",
+  "header -> signin": "Zaloguj",
+  "header -> signup": "Zarejestruj",
+  "nav-modal -> signin as parishioner": "zaloguj się jako parafianin",
+  "nav-modal -> signin as priest": "zaloguj się jako ksiądz",
+  "nav-modal -> signup as parishioner": "zarejestruj się jako parafianin",
+  "nav-modal -> signup as priest": "zarejestruj się jako ksiądz"
+}

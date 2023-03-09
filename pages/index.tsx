@@ -1,8 +1,6 @@
-import Head from "next/head";
-// import Image from "next/image";
-
-import LandingHeader from "components/layout/header/LandingHeader";
 import HeroBackground from "components/global/hero/HeroBackground";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Home() {
   return (
@@ -11,3 +9,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

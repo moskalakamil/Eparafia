@@ -1,13 +1,10 @@
 import Layout from "components/layout";
-import { GetServerSideProps } from "next";
+import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
-import Head from "next/head";
-import { useEffect } from "react";
-import { Provider, useDispatch, useStore } from "react-redux";
+// import { Layout } from "pages";
+import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { fetchUserData } from "store/auth-slice";
 import store, { persistor } from "store/store";
-// import store, { persistor } from "store/store";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "styles/global-style";
 import { theme } from "styles/theme";
@@ -28,4 +25,4 @@ const App = ({ Component, pageProps }: AppProps) => {
     </ThemeProvider>
   );
 };
-export default App;
+export default appWithTranslation(App);

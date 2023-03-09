@@ -3,13 +3,14 @@ import TextDetails from "components/global/UI/TextDetails";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useTranslation } from "next-i18next";
 
 import styled from "styled-components";
-import { ParishNewsData } from "../../../constants/parish";
 
 import ParishNewsHeading from "./NewsHeading";
 
 const News = () => {
+  const { t } = useTranslation();
   return (
     <>
       <ParishNewsHeading />
@@ -37,12 +38,12 @@ const News = () => {
             {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
             }
-            <Link href={"asd"}>{ParishNewsData.readMore}</Link>
+            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
           </TextStyle>
           <DownSideStyle>
             <TextDetails text="69.13.2137" size="medium" />
             <ButtonDetails
-              text={ParishNewsData.edit}
+              text={t("parish-news -> edit news")}
               color="secondary"
               width="50%"
             />
@@ -70,12 +71,12 @@ const News = () => {
             {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
             }
-            <Link href={"asd"}>{ParishNewsData.readMore}</Link>
+            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
           </TextStyle>
           <DownSideStyle>
             <TextDetails text="69.13.2137" />
             <ButtonDetails
-              text={ParishNewsData.edit}
+              text={t("parish-news -> edit news")}
               color="secondary"
               width="50%"
             />
@@ -103,12 +104,12 @@ const News = () => {
             {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
             }
-            <Link href={"asd"}>{ParishNewsData.readMore}</Link>
+            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
           </TextStyle>
           <DownSideStyle>
             <TextDetails text="69.13.2137" />
             <ButtonDetails
-              text={ParishNewsData.edit}
+              text={t("parish-news -> edit news")}
               color="secondary"
               width="50%"
             />

@@ -1,19 +1,20 @@
 import ButtonDetails from "components/global/UI/ButtonDetails";
 import Image from "next/image";
 import React from "react";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
-import { ParishEditingNews } from "../../../../constants/parish";
 
 const NewsEditForm = () => {
+  const { t } = useTranslation();
   return (
     <FormStyle>
       <FormLeftContainerStyle>
         <InputContainerStyle>
-          <label>{ParishEditingNews.editTittleText}</label>
+          <label>{t("edit-news-header -> edit news")}</label>
           <TextareaStyle height="100px"></TextareaStyle>
         </InputContainerStyle>
         <InputContainerStyle>
-          <label>{ParishEditingNews.editPhotoText}</label>
+          <label>{t("edit-news-image -> image")}</label>
           <PhotoDivStyle>
             <Image
               src="/images/global/background.png"
@@ -21,12 +22,12 @@ const NewsEditForm = () => {
               width={400}
               height={240}
             ></Image>
-            <ButtonDetails text={ParishEditingNews.changePhotoText} />
+            <ButtonDetails text={t("edit-news-change-image -> change image")} />
           </PhotoDivStyle>
         </InputContainerStyle>
       </FormLeftContainerStyle>
       <InputContainerStyle>
-        <label>{ParishEditingNews.editDescribeText}</label>
+        <label>{t("edit-news-describe -> describe")}</label>
         <TextareaStyle height="480px"></TextareaStyle>
       </InputContainerStyle>
     </FormStyle>

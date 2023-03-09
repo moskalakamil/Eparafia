@@ -63,8 +63,10 @@ export const fetchUserData = createAsyncThunk(
       });
       const data = await res.json();
       const priestData = data.data;
+      console.log(data);
       return { jwt, decoded_jwt, data: priestData };
     } else {
+      console.log("nieksiadz");
       return { jwt, decoded_jwt };
     }
   }
@@ -106,13 +108,13 @@ const authSlice = createSlice({
         state.email = action.payload.decoded_jwt.Email;
         state.role = action.payload.decoded_jwt.role;
         console.log(action.payload.data);
-        if (action.payload.decoded_jwt.role !== "Priest") return;
-        console.log(action.payload.data);
-
-        state.parishId = action.payload.data.parishId;
-        state.parish.callName = action.payload.data.parish.callName;
-
-        console.log(state);
+        if (
+          action.payload.decoded_jwt.role === "Priest" &&
+          action.payload.data.parish !== null
+        ) {
+          state.parishId = action.payload.data.parishId;
+          state.parish.callName = action.payload.data.parish.callName;
+        }
       }
     );
   },
