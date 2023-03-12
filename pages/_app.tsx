@@ -1,7 +1,7 @@
 import Layout from "components/layout";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
-// import { Layout } from "pages";
+import Head from "next/head";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "store/store";

@@ -25,7 +25,7 @@ const BtnEditGoBack = ({
       <ContainerStyle minWidth={minWidthTextVisible + "px"}>
         <div style={{ position: "relative" }}>
           <Image
-            src="/images/global/go-back.svg"
+            src="/images/go-back.svg"
             alt="Go back to parish"
             // fill
             width="50"

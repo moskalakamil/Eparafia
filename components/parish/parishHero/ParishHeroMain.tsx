@@ -30,7 +30,7 @@ const ParishHeroMain = ({ callname }: IProps) => {
           margin="5% 0"
         />
         <Image
-          src="/images/Parish/priest.svg"
+          src="/images/priest.svg"
           alt="priest icon"
           width={50}
           height={50}
