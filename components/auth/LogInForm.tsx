@@ -43,7 +43,6 @@ const LogInForm = ({ whoIsLogin }: IProps) => {
     try {
       setIsLoading(true);
       setError("");
-
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_IDENTITY_URL}/${whoBackendEndpoint}/login`,
 
