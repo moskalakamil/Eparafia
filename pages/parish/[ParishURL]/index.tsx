@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ParishURL = (props: any) => {
+  console.log(props);
   return (
     <>
       <ParishHero callname="asd" />
@@ -16,72 +17,49 @@ const ParishURL = (props: any) => {
 
 export default ParishURL;
 
-export const loadParishes = async () => {
-  // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Parish`, {
-  //   headers: {
-  //     "Content-Type": "application/json",
+export const loadParishes = async (ParishURL: string) => {
+  console.log(ParishURL);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetParishByShortName?shortName=${ParishURL}`
+  );
 
-  //   },
-  // });
-  // const data = await res.json();
-  // console.log(data);
-  // return data;
-  return {
-    statusCode: 200,
-    data: {
-      id: "4136506c-81d9-4945-a947-dba7b9fc4a60",
-      callName: "Św Apostołów Szymona i Judy Tadeusza",
-      contact: { phoneNumber: "123123123", email: "rzejan@gmail.com" },
-      address: {
-        region: "Krakowska",
-        city: "Skawina",
-        street: "Kopścielna",
-        buildingNumber: "1",
-        postCode: "32-050",
-      },
-      priests: [
-        {
-          id: "6274f189-ddba-4551-9569-8fcbd2df65d1",
-          name: "Test Janek",
-          photo: {
-            path: "",
-            pathMin: "",
-          },
-          functionParish: 0,
-        },
-      ],
-    },
-    errors: null,
-  };
+  return await res.json();
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  locale,
-  parishURL,
-}: any) => {
-  const parishes = await loadParishes();
+export async function getStaticProps({ params, locale }: any) {
+  const parishes = await loadParishes(params.ParishURL);
 
   return {
     props: {
-      // parishes,
+      parishes,
       ...(await serverSideTranslations(locale, ["common", "parish"])),
     },
   };
+}
+
+const loadParishesURL = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetAllParishShortNames`
+  );
+
+  return await res.json();
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locale }: any) => {
-  // const res = await fetch("");
-  // const parishes = await res.json();
+export const getStaticPaths: GetStaticPaths = async ({ locales }: any) => {
+  const data = await loadParishesURL();
 
-  // const paths = parishes.map((parish) => ({
-  //   params: { ParishURL: parish.url },
-  // }));
-  console.log(locale);
-  const paths = [
-    { params: { ParishURL: "a" } },
-    { params: { ParishURL: "b" } },
-    { params: { ParishURL: "c" } },
-  ];
+  const parishes = await data.data;
 
-  return { paths, fallback: true };
+  const paths: any[] = [];
+
+  parishes.map((parish: string | null) => {
+    locales.map((locale: string) => {
+      return paths.push({
+        params: { ParishURL: `${parish}` },
+        locale,
+      });
+    });
+  });
+
+  return { paths, fallback: false };
 };
