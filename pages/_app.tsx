@@ -11,18 +11,23 @@ import { theme } from "styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          {/* {() => ( */}
-          <Layout>
-            <Component {...pageProps} />
-            <GlobalStyle />
-          </Layout>
-          {/* )} */}
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            {() => (
+              <Layout>
+                <Component {...pageProps} />
+                <GlobalStyle />
+              </Layout>
+            )}
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </>
   );
 };
 export default appWithTranslation(App);
