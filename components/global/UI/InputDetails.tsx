@@ -64,7 +64,7 @@ const SpanStyle = styled.span<{ isFocus: boolean }>`
   left: ${(props) => (props.isFocus ? "0" : "50%")};
   width: ${(props) => (props.isFocus ? "100%" : "0")};
   height: 1.2px;
-  background-color: #3399ff;
+  background-color: ${(props) => props.theme.colors.primary};
   transition: 0.4s;
   @media (min-width: 768px) {
     display: none;
