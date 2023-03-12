@@ -28,7 +28,7 @@ const ParishHeader = ({ isAuthenticated }: IProps) => {
     <HeaderStyle>
       <Link href="/">
         <Image
-          src="/images/global/logo.png"
+          src="/images/logo.png"
           alt="logo"
           fill
           sizes="(max-width: 768px) 100vw,

@@ -25,7 +25,7 @@ const News = () => {
           />
           <ImageDivStyle>
             <Image
-              src="/images/global/background.png"
+              src="/images/background.png"
               alt="background"
               fill
               priority={true}
@@ -58,7 +58,7 @@ const News = () => {
           />
           <ImageDivStyle>
             <Image
-              src="/images/global/background.png"
+              src="/images/background.png"
               alt="background"
               fill
               priority={true}
@@ -91,7 +91,7 @@ const News = () => {
           />
           <ImageDivStyle>
             <Image
-              src="/images/global/background.png"
+              src="/images/background.png"
               alt="background"
               fill
               priority={true}

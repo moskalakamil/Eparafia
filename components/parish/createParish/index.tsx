@@ -21,7 +21,7 @@ interface ISubmitProps {
 const CreateParish = () => {
   const { t } = useTranslation("parish");
 
-  const jwt = useSelector((state: any) => state.auth.token);
+  const jwt = useSelector((state: any) => state.auth.jwt);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState("");
@@ -45,7 +45,7 @@ const CreateParish = () => {
     try {
       setIsLoading(true);
       setError("");
-      const res = await fetch(`${process.env.API_URL}/Parish`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Parish`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const CreateParish = () => {
   };
   return (
     <ContainerStyle>
-      {error ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <>
