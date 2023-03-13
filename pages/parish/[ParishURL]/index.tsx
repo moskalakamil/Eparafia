@@ -4,11 +4,11 @@ import MenuCards from "components/parish/parishMenu";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const ParishURL = (props: any) => {
-  console.log(props);
+const ParishURL = ({ parishes }: any) => {
+  const { data } = parishes;
   return (
     <>
-      <ParishHero callname="asd" />
+      <ParishHero callname={data.callName} />
       <News />
       <MenuCards />
     </>
@@ -18,7 +18,6 @@ const ParishURL = (props: any) => {
 export default ParishURL;
 
 export const loadParishes = async (ParishURL: string) => {
-  console.log(ParishURL);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetParishByShortName?shortName=${ParishURL}`
   );
@@ -37,7 +36,7 @@ export async function getStaticProps({ params, locale }: any) {
   };
 }
 
-const loadParishesURL = async () => {
+const loadParishesPaths = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetAllParishShortNames`
   );
@@ -46,13 +45,13 @@ const loadParishesURL = async () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }: any) => {
-  const data = await loadParishesURL();
+  const data = await loadParishesPaths();
 
-  const parishes = await data.data;
+  const parishes: string[] = await data.data;
 
   const paths: any[] = [];
 
-  parishes.map((parish: string | null) => {
+  parishes.map((parish) => {
     locales.map((locale: string) => {
       return paths.push({
         params: { ParishURL: `${parish}` },
