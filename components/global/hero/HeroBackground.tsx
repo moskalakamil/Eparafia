@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled from "styled-components";
 
 interface IProps {
   children?: JSX.Element;
@@ -9,7 +9,7 @@ interface IProps {
 const HeroBackground = ({ children, isLandingPage }: IProps) => {
   return (
     <BackgroundImageStyle islandingpage={isLandingPage}>
-      <Image src="/images/global/background.png" alt="" fill />
+      <Image src="/images/background.png" alt="" fill />
       {children}
     </BackgroundImageStyle>
   );
@@ -26,5 +26,5 @@ const BackgroundImageStyle = styled.div<IStyleProps>`
   width: 100vw;
   height: 100vh;
   top: 0;
-  max-height: ${(props) => (props.islandingpage ? '1000px' : 'none')};
+  max-height: ${(props) => (props.islandingpage ? "1000px" : "none")};
 `;
