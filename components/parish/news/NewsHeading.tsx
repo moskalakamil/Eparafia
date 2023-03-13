@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 
 const NewsHeading = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("parish");
   return (
     <ContainerStyle>
       <TextDetails

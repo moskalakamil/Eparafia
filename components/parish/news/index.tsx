@@ -8,113 +8,44 @@ import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 
 import ParishNewsHeading from "./NewsHeading";
+import NewsCard from "./NewsCard";
 
 const News = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("parish");
   return (
     <>
       <ParishNewsHeading />
       <ContainerStyle>
-        <NewsCardStyle>
-          <TextDetails
-            text={"Przekazanie swiatla pokoju"}
-            size="medium"
-            weight="large"
-            underline={true}
-            align="center"
-          />
-          <ImageDivStyle>
-            <Image
-              src="/images/global/background.png"
-              alt="background"
-              fill
-              priority={true}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </ImageDivStyle>
-          <TextStyle>
-            {
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
-            }
-            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
-          </TextStyle>
-          <DownSideStyle>
-            <TextDetails text="69.13.2137" size="medium" />
-            <ButtonDetails
-              text={t("parish-news -> edit news")}
-              color="secondary"
-              width="50%"
-            />
-          </DownSideStyle>
-        </NewsCardStyle>
-        <NewsCardStyle>
-          <TextDetails
-            text={"Przekazanie swiatla pokoju"}
-            weight="large"
-            underline={true}
-            align="center"
-          />
-          <ImageDivStyle>
-            <Image
-              src="/images/global/background.png"
-              alt="background"
-              fill
-              priority={true}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </ImageDivStyle>
-          <TextStyle>
-            {
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
-            }
-            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
-          </TextStyle>
-          <DownSideStyle>
-            <TextDetails text="69.13.2137" />
-            <ButtonDetails
-              text={t("parish-news -> edit news")}
-              color="secondary"
-              width="50%"
-            />
-          </DownSideStyle>
-        </NewsCardStyle>
-        <NewsCardStyle>
-          <TextDetails
-            text={"Przekazanie swiatla pokoju"}
-            weight="large"
-            underline={true}
-            align="center"
-          />
-          <ImageDivStyle>
-            <Image
-              src="/images/global/background.png"
-              alt="background"
-              fill
-              priority={true}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </ImageDivStyle>
-          <TextStyle>
-            {
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."
-            }
-            <Link href={"asd"}>{t("parish-news -> read more")}</Link>
-          </TextStyle>
-          <DownSideStyle>
-            <TextDetails text="69.13.2137" />
-            <ButtonDetails
-              text={t("parish-news -> edit news")}
-              color="secondary"
-              width="50%"
-            />
-          </DownSideStyle>
-        </NewsCardStyle>
+        <NewsCard
+          title={"Przekazanie swiatla pokoju"}
+          image={
+            "https://upload.wikimedia.org/wikipedia/commons/2/25/2016_Ko%C5%9Bci%C3%B3%C5%82_%C5%9Bw._Jana_Ewangelisty_w_Nied%C5%BAwiedniku_2.jpg"
+          }
+          description={
+            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."'
+          }
+          date={"12.03.2137"}
+        />
+        <NewsCard
+          title={"Przekazanie swiatla pokoju"}
+          image={
+            "https://upload.wikimedia.org/wikipedia/commons/2/25/2016_Ko%C5%9Bci%C3%B3%C5%82_%C5%9Bw._Jana_Ewangelisty_w_Nied%C5%BAwiedniku_2.jpg"
+          }
+          description={
+            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."'
+          }
+          date={"12.03.2137"}
+        />
+        <NewsCard
+          title={"Przekazanie swiatla pokoju"}
+          image={
+            "https://upload.wikimedia.org/wikipedia/commons/2/25/2016_Ko%C5%9Bci%C3%B3%C5%82_%C5%9Bw._Jana_Ewangelisty_w_Nied%C5%BAwiedniku_2.jpg"
+          }
+          description={
+            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa, pulvinar quis cursus ut, varius interdum Etiam non accumsan turpis, ac vestibulum tellus. Duis urna massa...."'
+          }
+          date={"12.03.2137"}
+        />
       </ContainerStyle>
     </>
   );
@@ -129,32 +60,4 @@ const ContainerStyle = styled.div`
   justify-content: center;
   width: 100%;
   padding: 0 5%;
-`;
-const NewsCardStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: calc(100% / 3);
-  min-width: 500px;
-  padding: 5%;
-`;
-const ImageDivStyle = styled.div`
-  position: relative;
-  margin: 5% 0;
-  width: 400px;
-  height: 240px;
-`;
-const TextStyle = styled.p`
-  font-size: ${(props) => props.theme.fontSizes.small.pc};
-
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.primary};
-    margin: 0 2%;
-  }
-`;
-
-const DownSideStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;

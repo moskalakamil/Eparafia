@@ -7,6 +7,13 @@ const nextConfig = {
     styledComponents: true,
   },
   i18n,
+  images: {
+    remotePatterns: [
+      {
+        hostname: "upload.wikimedia.org",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
