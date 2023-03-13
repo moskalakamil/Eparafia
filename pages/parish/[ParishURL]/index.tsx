@@ -26,14 +26,14 @@ export const loadParishes = async (ParishURL: string) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({
+  params,
   locale,
-  parishURL,
 }: any) => {
-  const parishes = await loadParishes();
+  const parishes = await loadParishes(params.ParishURL);
 
   return {
     props: {
-      // parishes,
+      parishes,
       ...(await serverSideTranslations(locale, ["common", "parish"])),
     },
   };
