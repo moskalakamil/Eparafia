@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps = async ({
       parishes,
       ...(await serverSideTranslations(locale, ["common", "parish"])),
     },
+    revalidate: 1,
   };
 };
 
@@ -43,7 +44,6 @@ const loadParishesPaths = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetAllParishShortNames`
   );
-
   return await res.json();
 };
 
