@@ -44,7 +44,6 @@ const loadParishesPaths = async () => {
   return await res.json();
 };
 
-
 export const getStaticPaths: GetStaticPaths = async ({ locales }: any) => {
   const data = await loadParishesPaths();
 
@@ -61,5 +60,5 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }: any) => {
     });
   });
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 };
