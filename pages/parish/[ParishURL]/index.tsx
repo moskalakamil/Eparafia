@@ -6,6 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ParishURL = ({ parishes }: any) => {
   const { data } = parishes;
+  console.log(parishes);
   return (
     <>
       <ParishHero callname={data.callName} />
@@ -36,6 +37,7 @@ export const getStaticProps: GetStaticProps = async ({
       parishes,
       ...(await serverSideTranslations(locale, ["common", "parish"])),
     },
+    revalidate: 1,
   };
 };
 
@@ -43,8 +45,9 @@ const loadParishesPaths = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/Parish/GetAllParishShortNames`
   );
-
-  return await res.json();
+  const data = await res.json();
+  console.log(data);
+  return data;
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }: any) => {

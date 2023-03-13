@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Spinner from "components/global/loading/Spinner";
 import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "store/store";
+import { fetchUserData } from "store/auth-slice";
 
 interface ISubmitProps {
   callName: string;
@@ -20,6 +22,8 @@ interface ISubmitProps {
 
 const CreateParish = () => {
   const { t } = useTranslation("parish");
+
+  const dispatch = useAppDispatch();
 
   const jwt = useSelector((state: any) => state.auth.jwt);
 
@@ -72,6 +76,8 @@ const CreateParish = () => {
         let errorMessage = data.Errors.Message[0];
         throw new Error(errorMessage);
       }
+
+      dispatch(fetchUserData(jwt));
     } catch (err: any) {
       console.log(err);
       setError(err.message);
