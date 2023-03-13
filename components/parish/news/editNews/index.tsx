@@ -17,7 +17,7 @@ const NewsEditForm = () => {
           <label>{t("edit-news-image -> image")}</label>
           <PhotoDivStyle>
             <Image
-              src="/images/global/background.png"
+              src="/images/background.png"
               alt=""
               width={400}
               height={240}

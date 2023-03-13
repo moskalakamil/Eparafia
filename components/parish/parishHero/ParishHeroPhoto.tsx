@@ -5,7 +5,7 @@ const ParishHeroPhoto = () => {
   return (
     <ContainerStyle>
       <Image
-        src="/images/global/background.png"
+        src="/images/background.png"
         alt="Zdjęcie koscioła"
         fill
         priority={true}

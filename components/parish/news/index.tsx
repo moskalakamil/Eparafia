@@ -12,6 +12,7 @@ import NewsCard from "./NewsCard";
 
 const News = () => {
   const { t } = useTranslation("parish");
+  
   return (
     <>
       <ParishNewsHeading />
